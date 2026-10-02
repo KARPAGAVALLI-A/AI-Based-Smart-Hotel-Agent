@@ -1,0 +1,240 @@
+{
+  "hotel_info": {
+    "name": "KPR Hotel",
+    "established": 1998,
+    "tagline": "Authentic South Indian Hospitality & Madurai Culinary Heritage Since 1998",
+    "description": "KPR Hotel is a celebrated hospitality institution renowned for premium hotel accommodations, authentic Madurai and Chettinad culinary delicacies, woodfire Seeraga Samba biryanis, crispy ghee roast dosas, and world-class guest services.",
+    "branches": [
+      {
+        "id": "madurai-main",
+        "name": "Madurai Main Branch",
+        "address": "42 West Masi Street, Near Meenakshi Amman Temple & Mattuthavani Junction, Madurai, Tamil Nadu 625001",
+        "phone": "+91 98400 12345",
+        "hours": "7:00 AM – 11:00 PM (All 7 Days)",
+        "dining": "Air-Conditioned Family Hall, Traditional Plantain Leaf Dining, Private Party Booths",
+        "parking": "Valet Parking Available"
+      },
+      {
+        "id": "chennai-flagship",
+        "name": "Chennai Flagship Branch",
+        "address": "88 Usman Road, Near Panagal Park, T. Nagar, Chennai, Tamil Nadu 600017",
+        "phone": "+91 98400 67890",
+        "hours": "7:00 AM – 11:00 PM (All 7 Days)",
+        "dining": "Fine Dining AC Hall & Quick Tiffin Lounge",
+        "parking": "Basement Parking Available"
+      }
+    ],
+    "timings": {
+      "overall": "7:00 AM to 11:00 PM every day",
+      "check_in": "12:00 PM (Early check-in from 9:00 AM subject to availability)",
+      "check_out": "11:00 AM (Late check-out until 2:00 PM upon request)",
+      "breakfast": "7:00 AM – 11:30 AM",
+      "lunch": "12:00 PM – 4:00 PM",
+      "snacks_tiffin": "4:00 PM – 6:30 PM",
+      "dinner": "6:30 PM – 11:00 PM"
+    },
+    "service_options": [
+      "Luxury Accommodations & Room Bookings",
+      "24/7 In-Room Dining & Room Service",
+      "Dine-in Restaurant with Live Seating Map",
+      "Contactless Online Food Ordering & Takeaway",
+      "Doorstep Delivery within 8 km (Avg 25–35 mins)",
+      "Express Laundry & Dry Cleaning",
+      "Airport & Railway Station Shuttle",
+      "Outdoor & Bulk Catering for 20 to 1,000+ guests"
+    ],
+    "facilities": [
+      "Complimentary High-Speed Wi-Fi (up to 200 Mbps)",
+      "24-Hour Front Desk & Concierge",
+      "Rooftop Swimming Pool (6:00 AM – 8:00 PM)",
+      "Modern Fitness Gym Center",
+      "Ayurvedic Spa & Wellness Center",
+      "Complimentary Valet Parking",
+      "Pure Vegetarian Dedicated Kitchen",
+      "Conference & Banquet Hall"
+    ],
+    "payment_methods": [
+      "UPI (Google Pay, PhonePe, Paytm, BHIM, QR code)",
+      "Credit Cards & Debit Cards (Visa, Mastercard, RuPay)",
+      "Net Banking",
+      "Cash on Delivery & Front Desk Cash"
+    ],
+    "delivery_policy": {
+      "fee": "₹30 flat delivery fee; FREE delivery for orders above ₹300",
+      "estimated_time": "25 to 35 minutes",
+      "packaging": "Eco-friendly, spill-proof food-grade containers"
+    },
+    "policies": {
+      "cancellation": "Free cancellation up to 24 hours prior to check-in date. Late cancellations incur 1 night charge.",
+      "id_proof": "Valid Government Photo ID (Aadhaar, Passport, Voter ID, or Driving License) is mandatory for all adult guests at check-in.",
+      "children": "Children up to 6 years stay free when sharing existing bedding.",
+      "pets": "Pets are not allowed on property; service/guide dogs are warmly welcome.",
+      "smoking": "All rooms are 100% non-smoking; designated smoking areas are available outdoors."
+    }
+  },
+  "rooms_catalog": [
+    {
+      "id": "deluxe",
+      "name": "Deluxe Room",
+      "price": 3000,
+      "currency": "INR",
+      "capacity": "2 Adults + 1 Child",
+      "bed_type": "King Size Bed",
+      "size": "320 sq.ft",
+      "breakfast_included": true,
+      "breakfast_details": "Yes, complimentary South Indian buffet breakfast included (7:00 AM – 10:30 AM).",
+      "available_count": 8,
+      "amenities": [
+        "Air Conditioning with Climate Control",
+        "High-Speed Free Wi-Fi",
+        "43-inch 4K Smart TV with Satellite Channels",
+        "Tea & Coffee Maker with Gourmet Sachets",
+        "En-suite Bathroom with Rain Shower",
+        "Luxury Ayurvedic Toiletries",
+        "Work Desk & Ergonomic Chair",
+        "24/7 Room Service Access"
+      ],
+      "description": "Spacious and elegant room designed with warm wooden accents, plush bedding, and modern comforts ideal for couples and business travelers."
+    },
+    {
+      "id": "premium",
+      "name": "Premium Room",
+      "price": 4200,
+      "currency": "INR",
+      "capacity": "3 Adults or 2 Adults + 2 Children",
+      "bed_type": "King Size Bed + Sofa Bed",
+      "size": "450 sq.ft",
+      "breakfast_included": true,
+      "breakfast_details": "Yes, complimentary premium buffet breakfast with live counter access included.",
+      "available_count": 5,
+      "amenities": [
+        "Private Balcony with Madurai Temple/City View",
+        "Deep Soaking Bathtub & Separate Rain Shower",
+        "Stocked Mini Bar & Snacks",
+        "55-inch 4K Smart TV",
+        "Nespresso Coffee Machine",
+        "Bathrobes and Slippers",
+        "Evening Turndown Service"
+      ],
+      "description": "Luxurious upgraded room featuring a private balcony with scenic views, bathtub, premium espresso machine, and expanded living space."
+    },
+    {
+      "id": "suite",
+      "name": "Executive Luxury Suite",
+      "price": 6500,
+      "currency": "INR",
+      "capacity": "4 Adults",
+      "bed_type": "Master Bedroom King Bed + Separate Living Lounge",
+      "size": "720 sq.ft",
+      "breakfast_included": true,
+      "breakfast_details": "Yes, complimentary royal chef-curated breakfast and high tea lounge access included.",
+      "available_count": 2,
+      "amenities": [
+        "Private Jacuzzi Whirlpool",
+        "Separate Master Bedroom and Living/Dining Room",
+        "Complimentary Airport/Railway Pickup & Drop",
+        "Dedicated 24/7 Personal Butler Service",
+        "65-inch OLED Home Theater TV",
+        "Complimentary Express Laundry (2 garments/day)",
+        "Complimentary High Tea & Cocktail Hours in Executive Lounge"
+      ],
+      "description": "Our pinnacle suite offering presidential luxury, private Jacuzzi, expansive living quarters, and dedicated butler service."
+    }
+  ],
+  "hotel_services": [
+    {
+      "id": "srv-room",
+      "name": "Room Service",
+      "price": 200,
+      "description": "24-hour round-the-clock in-room dining delivery service."
+    },
+    {
+      "id": "srv-laundry",
+      "name": "Laundry Service",
+      "price": 250,
+      "description": "Same-day express washing, drying, and steam ironing service."
+    },
+    {
+      "id": "srv-shuttle",
+      "name": "Airport Shuttle",
+      "price": 800,
+      "description": "Private chauffeur-driven AC sedan transfer to/from Madurai or Chennai Airport/Railway station."
+    },
+    {
+      "id": "srv-spa",
+      "name": "Ayurvedic Spa Massage",
+      "price": 1500,
+      "description": "60-minute rejuvenating authentic herbal oil massage and therapy."
+    },
+    {
+      "id": "srv-bed",
+      "name": "Extra Rollaway Bed",
+      "price": 700,
+      "description": "Comfortable rollaway bed with fresh cotton linens and extra pillows."
+    }
+  ],
+  "menu_highlights": {
+    "signature_dishes": [
+      "Madurai Mutton Kari Dosa (₹280) - Crispy dosa layered with tender minced mutton keema & eggs",
+      "Seeraga Samba Chicken Biryani (₹220) - Traditional brass deg woodfire cooked aromatic biryani",
+      "Royal Seeraga Samba Mutton Biryani (₹320) - Fragrant biryani with succulent tender mutton chunks",
+      "Crispy Ghee Roast Dosa (₹110) - Golden thin fermented rice crepe roasted with pure desi ghee",
+      "South Indian Veg Meals Thali (₹150) - Unlimited rice, sambar, rasam, kootu, poriyal, appalam, curd",
+      "Spiced Chicken 65 (₹190) - Deep fried crispy boneless chicken tossed with curry leaves and spices",
+      "Chilled Madurai Jigarthanda (₹80) - Famous almond gum, nannari syrup, basundi milk & ice cream drink",
+      "Kumbakonam Degree Filter Coffee (₹40) - Freshly brewed chicory blend with frothy whole cow milk"
+    ],
+    "dietary_and_spice": {
+      "vegetarian": "Separate dedicated pure vegetarian kitchen section preparing pure veg dosas, idlis, thali meals, paneer dishes, and snacks.",
+      "halal": "All meats sourced are 100% Halal certified and prepared fresh daily.",
+      "spice_levels": {
+        "mild": ["Ghee Roast Dosa", "Steamed Idli", "Madurai Jigarthanda", "Kumbakonam Filter Coffee"],
+        "medium": ["Seeraga Samba Chicken Biryani", "South Indian Veg Meals", "Malabar Parotta Feast", "Curd Rice"],
+        "spicy": ["Madurai Mutton Kari Dosa", "Chettinad Chicken Curry", "Chicken 65", "Pepper Mutton Fry"]
+      }
+    }
+  },
+  "offers_and_combos": [
+    {
+      "name": "Biryani + Starter + Drink Combo",
+      "code": "DEAL-BIRYANI-01",
+      "price": 319,
+      "original_price": 420,
+      "savings": "Save ₹101 (24% OFF)",
+      "includes": "1x Seeraga Samba Chicken Biryani + 1x Spiced Chicken 65 + 1x Madurai Jigarthanda + Raita & Salna"
+    },
+    {
+      "name": "South Indian Family Mega Feast",
+      "code": "DEAL-FAMILY-01",
+      "price": 749,
+      "original_price": 980,
+      "savings": "Save ₹231 (24% OFF)",
+      "includes": "2x Chicken Biryani + 1x Chettinad Chicken Curry + 4x Malabar Parotta + 2x Filter Coffee"
+    },
+    {
+      "name": "Morning Tiffin Grand Combo",
+      "code": "DEAL-TIFFIN-01",
+      "price": 189,
+      "original_price": 260,
+      "savings": "Save ₹71 (27% OFF)",
+      "includes": "1x Ghee Roast Dosa + 2x Medu Vada + 2x Steamed Idli + 1x Hot Filter Coffee"
+    }
+  ],
+  "coupons": [
+    { "code": "KPR15", "benefit": "15% discount on all orders above ₹200" },
+    { "code": "KPR50", "benefit": "Flat ₹50 discount on orders above ₹300" },
+    { "code": "WELCOME", "benefit": "Flat ₹100 discount on your first order" }
+  ],
+  "table_booking_info": {
+    "total_tables": 6,
+    "table_types": [
+      { "id": "Table 1", "seats": 2, "type": "Standard Couple Table", "ac": false },
+      { "id": "Table 2", "seats": 4, "type": "Standard Family Table", "ac": false },
+      { "id": "Table 3", "seats": 4, "type": "A/C Executive Dining Table", "ac": true },
+      { "id": "Table 4", "seats": 6, "type": "A/C Family Booth", "ac": true },
+      { "id": "Table 5", "seats": 2, "type": "Cozy Window Seating", "ac": false },
+      { "id": "Table 6", "seats": 8, "type": "Grand Family / Celebration Table", "ac": true }
+    ],
+    "booking_rules": "No advance booking fees required. Grace period is 15 minutes past the reserved slot time. Tables can be booked anytime for Lunch (12:30 PM & 1:30 PM) or Dinner (7:30 PM & 8:30 PM)."
+  }
+}

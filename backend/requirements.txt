@@ -1,0 +1,21 @@
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+pydantic==2.9.2
+python-multipart==0.0.9
+
+# NLP / language detection
+langdetect==1.0.9
+rapidfuzz==3.9.7
+scikit-learn==1.5.1
+numpy==1.26.4
+
+# Voice: Speech-to-Text and Text-to-Speech
+SpeechRecognition==3.10.4
+gTTS==2.5.3
+pydub==0.25.1
+# Optional higher-accuracy offline ASR (heavier install, CPU/GPU capable):
+# openai-whisper==20231117
+
+# Checkout / QR
+qrcode[pil]==7.4.2
+Pillow==10.4.0

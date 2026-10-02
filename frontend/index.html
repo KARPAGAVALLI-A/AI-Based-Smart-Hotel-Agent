@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KPR Hotel — Multilingual AI Restaurant & Delivery Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="app-layout" id="appLayout">
+
+    <!-- ================= 1. REUSABLE LEFT SIDEBAR COMPONENT ================= -->
+    <aside class="app-sidebar" id="appSidebar" aria-label="Main Navigation Sidebar">
+      <!-- Top Brand Logo & Header -->
+      <div class="sidebar-brand">
+        <a href="#home" class="sidebar-brand-link" title="KPR Hotel Home">
+          <div class="sidebar-brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 48 48" width="28" height="28">
+              <path d="M24 4c-7 6-11 13-11 20a11 11 0 0 0 22 0c0-7-4-14-11-20Z" fill="var(--turmeric)"/>
+              <path d="M24 4c-4 6-6 12-6 17a6 6 0 0 0 12 0c0-5-2-11-6-17Z" fill="var(--clay)"/>
+            </svg>
+          </div>
+          <div class="sidebar-brand-text">
+            <span class="brand-title">KPR Hotel</span>
+            <span class="brand-subtitle">Since 1998 · Madurai &amp; Chennai</span>
+          </div>
+        </a>
+        <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Close sidebar menu" title="Close">✕</button>
+      </div>
+
+      <!-- Scrollable Navigation Items -->
+      <nav class="sidebar-nav" id="sidebarNav">
+        <!-- SECTION 1: MAIN -->
+        <div class="sidebar-section">
+          <div class="section-label" data-i18n="sec_main">MAIN</div>
+          <ul class="nav-list">
+            <li>
+              <a href="#home" class="sidebar-item active" data-page="home">
+                <span class="item-icon">🏠</span>
+                <span class="item-label" data-i18n="nav_dashboard">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="#ai-assistant" class="sidebar-item" data-page="ai-assistant">
+                <span class="item-icon">🤖</span>
+                <span class="item-label" data-i18n="nav_ai_agent">AI Voice Agent</span>
+                <span class="sidebar-pill-tag">AI</span>
+              </a>
+            </li>
+            <li>
+              <a href="#menu" class="sidebar-item" data-page="menu">
+                <span class="item-icon">🍽️</span>
+                <span class="item-label" data-i18n="nav_menu">Menu</span>
+              </a>
+            </li>
+            <li>
+              <a href="#reservations" class="sidebar-item" data-page="reservations">
+                <span class="item-icon">📅</span>
+                <span class="item-label" data-i18n="nav_book_table">Book Table</span>
+              </a>
+            </li>
+            <li>
+              <a href="#order-status" class="sidebar-item" data-page="order-status">
+                <span class="item-icon">📍</span>
+                <span class="item-label" data-i18n="nav_live_track">Live Track</span>
+              </a>
+            </li>
+            <li>
+              <a href="#offers" class="sidebar-item" data-page="offers">
+                <span class="item-icon">🏷️</span>
+                <span class="item-label" data-i18n="nav_offers">Offers</span>
+                <span class="sidebar-badge offer-badge">5</span>
+              </a>
+            </li>
+            <li>
+              <a href="#favorites" class="sidebar-item" data-page="favorites">
+                <span class="item-icon">❤️</span>
+                <span class="item-label" data-i18n="nav_favorites">Favorites</span>
+                <span class="sidebar-badge fav-badge" id="navFavBadge">0</span>
+              </a>
+            </li>
+            <li>
+              <a href="#cart-checkout" class="sidebar-item" data-page="cart-checkout">
+                <span class="item-icon">🛒</span>
+                <span class="item-label" data-i18n="nav_cart">Cart</span>
+                <span class="sidebar-badge cart-badge" id="navCartBadge">0</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-divider"></div>
+
+        <!-- SECTION 2: DINING & ORDERS -->
+        <div class="sidebar-section">
+          <div class="section-label" data-i18n="sec_dining">DINING &amp; ORDERS</div>
+          <ul class="nav-list">
+            <li>
+              <a href="#order-history" class="sidebar-item" data-page="order-history">
+                <span class="item-icon">📜</span>
+                <span class="item-label" data-i18n="nav_order_history">Order History</span>
+              </a>
+            </li>
+            <li>
+              <a href="#specials" class="sidebar-item" data-page="specials">
+                <span class="item-icon">⭐</span>
+                <span class="item-label" data-i18n="nav_specials">Chef Specials</span>
+              </a>
+            </li>
+            <li>
+              <a href="#catering" class="sidebar-item" data-page="catering">
+                <span class="item-icon">🍱</span>
+                <span class="item-label" data-i18n="nav_catering">Bulk Catering</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-divider"></div>
+
+        <!-- SECTION 3: MANAGEMENT (Kitchen Admin with nested submenu) -->
+        <div class="sidebar-section">
+          <div class="section-label" data-i18n="sec_management">MANAGEMENT</div>
+          <ul class="nav-list">
+            <li class="has-submenu">
+              <a href="#kitchen-admin" class="sidebar-item" data-page="kitchen-admin">
+                <span class="item-icon">👨‍🍳</span>
+                <span class="item-label" data-i18n="nav_kitchen_admin">Kitchen Admin</span>
+              </a>
+              <ul class="submenu-list">
+                <li>
+                  <a href="#kitchen-admin" class="submenu-item" data-page="kitchen-admin">
+                    <span class="submenu-branch">├─</span>
+                    <span data-i18n="nav_kds">Kitchen Orders (KDS)</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#analytics" class="submenu-item" data-page="analytics">
+                    <span class="submenu-branch">├─</span>
+                    <span data-i18n="nav_analytics">Business Analytics</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#menu-admin" class="submenu-item" data-page="menu-admin">
+                    <span class="submenu-branch">└─</span>
+                    <span data-i18n="nav_menu_admin">Menu &amp; Stock Manager</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-divider"></div>
+
+        <!-- SECTION 4: INFO & SUPPORT -->
+        <div class="sidebar-section">
+          <div class="section-label" data-i18n="sec_support">INFO &amp; SUPPORT</div>
+          <ul class="nav-list">
+            <li>
+              <a href="#about" class="sidebar-item" data-page="about">
+                <span class="item-icon">📖</span>
+                <span class="item-label" data-i18n="nav_about">Our Story</span>
+              </a>
+            </li>
+            <li>
+              <a href="#nutrition" class="sidebar-item" data-page="nutrition">
+                <span class="item-icon">🥗</span>
+                <span class="item-label" data-i18n="nav_nutrition">Nutrition &amp; Allergens</span>
+              </a>
+            </li>
+            <li>
+              <a href="#reviews" class="sidebar-item" data-page="reviews">
+                <span class="item-icon">⭐</span>
+                <span class="item-label" data-i18n="nav_reviews">Customer Reviews</span>
+              </a>
+            </li>
+            <li>
+              <a href="#help-contact" class="sidebar-item" data-page="help-contact">
+                <span class="item-icon">❓</span>
+                <span class="item-label" data-i18n="nav_help">Help &amp; Contact</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-divider"></div>
+
+        <!-- SECTION 5: SYSTEM (Settings & Language) -->
+        <div class="sidebar-section sidebar-system-section">
+          <div class="section-label" data-i18n="sec_system">SYSTEM</div>
+          <ul class="nav-list">
+            <li>
+              <a href="#settings" class="sidebar-item" data-page="settings" id="sidebarSettingsBtn">
+                <span class="item-icon">⚙️</span>
+                <span class="item-label" data-i18n="nav_settings">Settings</span>
+              </a>
+            </li>
+          </ul>
+
+          <!-- Centralized Language Selector inside Sidebar -->
+          <div class="sidebar-lang-container">
+            <div class="sidebar-lang-header">
+              <span class="lang-icon">🌐</span>
+              <span class="lang-title" data-i18n="nav_language">Language</span>
+            </div>
+            <select id="sidebarLangSelect" class="sidebar-lang-select" title="Select Platform Language">
+              <option value="en-IN">English</option>
+              <option value="ta-IN">தமிழ் (Tamil)</option>
+              <option value="ta-Latn">Tanglish (தமிழ்)</option>
+              <option value="hi-IN">हिन्दी (Hindi)</option>
+              <option value="ml-IN">മലയാളം (Malayalam)</option>
+              <option value="te-IN">తెలుగు (Telugu)</option>
+              <option value="kn-IN">ಕನ್ನಡ (Kannada)</option>
+            </select>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Sidebar User Profile Card -->
+      <div class="sidebar-footer">
+        <div class="user-profile-widget">
+          <div class="user-avatar">👤</div>
+          <div class="user-info">
+            <div class="user-name">Guest Customer</div>
+            <div class="user-branch">Madurai &amp; Chennai</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Mobile Drawer Overlay Backdrop -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- ================= 2. MAIN CONTENT WRAPPER ================= -->
+    <div class="main-content-wrap" id="mainContentWrap">
+
+      <!-- Compact Top Header (No horizontal menu repetition!) -->
+      <header class="top-header" id="topHeader">
+        <div class="header-left">
+          <button class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Toggle Sidebar Menu" title="Open Menu">
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+          </button>
+          <div class="header-breadcrumb">
+            <span class="crumb-brand">KPR Hotel</span>
+            <span class="crumb-sep">/</span>
+            <span class="crumb-current" id="headerBreadcrumbCurrent">Dashboard</span>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <!-- Active Language Indicator -->
+          <div class="header-lang-indicator" id="headerLangIndicator" title="Active Language">
+            <span>🌐</span>
+            <span id="headerLangLabel">English</span>
+          </div>
+
+          <!-- Notifications Button -->
+          <button class="header-icon-btn" id="headerNotifyBtn" title="Notifications">
+            <span>🔔</span>
+            <span class="header-pulse-dot"></span>
+          </button>
+
+          <!-- Cart Live Pill -->
+          <a href="#cart-checkout" class="header-cart-pill" id="headerCartBtn" title="View Cart">
+            <span>🛒</span>
+            <span class="header-cart-badge" id="headerCartCount">0</span>
+          </a>
+
+          <!-- User Profile -->
+          <div class="header-user-badge" id="headerUserBadge" title="Customer Profile">
+            <span class="avatar-mini">👤</span>
+            <span class="user-mini-name">Guest</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content Area -->
+      <main class="page-content-area" id="pageContentArea">
+
+        <!-- ================= PAGE 1: REALISTIC DASHBOARD LANDING PAGE ================= -->
+        <section class="page-view active" id="view-home">
+          <!-- DASHBOARD GREETING & HERO BANNER -->
+          <div class="dashboard-banner">
+            <div class="banner-text">
+              <span class="banner-badge">🔥 AUTHENTIC SOUTH INDIAN HOSPITALITY</span>
+              <h1 id="dashGreetingTitle">Welcome to KPR Hotel Dashboard</h1>
+              <p id="dashGreetingDesc">Order fresh Seeraga Samba Biryani, Crispy Ghee Roast, and Authentic Meals with AI Voice &amp; Text in English, Tamil, and Tanglish.</p>
+              
+              <!-- Quick Actions as requested -->
+              <div class="dashboard-quick-actions">
+                <a href="#menu" class="dash-quick-btn primary">
+                  <span>🛒</span> <span data-i18n="qa_order_food">Order Food</span>
+                </a>
+                <a href="#menu" class="dash-quick-btn secondary">
+                  <span>📖</span> <span data-i18n="qa_view_menu">View Menu</span>
+                </a>
+                <a href="#ai-assistant" class="dash-quick-btn accent">
+                  <span>🎙️</span> <span data-i18n="qa_ask_ai">Ask AI</span>
+                </a>
+                <a href="#reservations" class="dash-quick-btn outline">
+                  <span>📅</span> <span data-i18n="qa_book_table">Book Table</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="banner-highlights">
+              <div class="highlight-chip">
+                <span class="chip-val">25+</span>
+                <span class="chip-lbl" data-i18n="stat_legacy">Years Legacy</span>
+              </div>
+              <div class="highlight-chip">
+                <span class="chip-val">4.8★</span>
+                <span class="chip-lbl" data-i18n="stat_reviews">12,000+ Reviews</span>
+              </div>
+              <div class="highlight-chip">
+                <span class="chip-val">3</span>
+                <span class="chip-lbl" data-i18n="stat_langs">Languages (EN/TA/Tanglish)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- SUMMARY KPI STAT CARDS (5 cards requested) -->
+          <div class="dashboard-kpi-grid">
+            <!-- 1. Total Orders -->
+            <a href="#order-history" class="kpi-card">
+              <div class="kpi-icon-box clay">📦</div>
+              <div class="kpi-info">
+                <span class="kpi-label" data-i18n="kpi_total_orders">Total Orders</span>
+                <span class="kpi-value" id="kpiTotalOrders">2 Orders</span>
+                <span class="kpi-subtext" id="kpiTotalSpend">₹870 total spent</span>
+              </div>
+            </a>
+
+            <!-- 2. Active Orders -->
+            <a href="#order-status" class="kpi-card">
+              <div class="kpi-icon-box leaf">⚡</div>
+              <div class="kpi-info">
+                <span class="kpi-label" data-i18n="kpi_active_orders">Active Orders</span>
+                <span class="kpi-value" id="kpiActiveOrders">1 In Progress</span>
+                <span class="kpi-subtext">Estimated delivery ~25 mins</span>
+              </div>
+            </a>
+
+            <!-- 3. Favorite Items -->
+            <a href="#favorites" class="kpi-card">
+              <div class="kpi-icon-box chilli">❤️</div>
+              <div class="kpi-info">
+                <span class="kpi-label" data-i18n="kpi_favorites">Favorite Items</span>
+                <span class="kpi-value" id="kpiFavoritesCount">0 Saved</span>
+                <span class="kpi-subtext">Click ❤️ on dishes to bookmark</span>
+              </div>
+            </a>
+
+            <!-- 4. Cart Items -->
+            <a href="#cart-checkout" class="kpi-card">
+              <div class="kpi-icon-box turmeric">🛒</div>
+              <div class="kpi-info">
+                <span class="kpi-label" data-i18n="kpi_cart_items">Cart Items</span>
+                <span class="kpi-value" id="kpiCartCount">0 Items</span>
+                <span class="kpi-subtext" id="kpiCartTotal">₹0.00 cart value</span>
+              </div>
+            </a>
+
+            <!-- 5. Today's Offers -->
+            <a href="#offers" class="kpi-card">
+              <div class="kpi-icon-box gold">🏷️</div>
+              <div class="kpi-info">
+                <span class="kpi-label" data-i18n="kpi_offers">Today's Offers</span>
+                <span class="kpi-value" id="kpiOffersCount">5 Deals Active</span>
+                <span class="kpi-subtext">Up to 35% Combo Savings</span>
+              </div>
+            </a>
+          </div>
+
+          <!-- MAIN DASHBOARD CONTENT (Two balanced columns) -->
+          <div class="dashboard-main-grid">
+            <!-- LEFT COLUMN: AI Recommendations & Popular Dishes -->
+            <div class="dashboard-col-left">
+              <!-- AI RECOMMENDATIONS -->
+              <div class="dashboard-panel">
+                <div class="panel-header">
+                  <div>
+                    <h3 class="panel-title">🤖 <span data-i18n="dash_ai_recs">AI Recommendations</span></h3>
+                    <p class="panel-subtitle" data-i18n="dash_ai_recs_sub">Handcrafted suggestions personalized for authentic South Indian taste</p>
+                  </div>
+                  <a href="#ai-assistant" class="panel-link">🎙️ <span data-i18n="dash_order_with_ai">Ask AI →</span></a>
+                </div>
+                <div class="ai-recs-grid" id="dashboardAiRecsGrid">
+                  <!-- Injected dynamically from menu -->
+                </div>
+              </div>
+
+              <!-- POPULAR DISHES (Customer Favorites) -->
+              <div class="dashboard-panel">
+                <div class="panel-header">
+                  <div>
+                    <h3 class="panel-title">🔥 <span data-i18n="dash_popular_dishes">Popular Dishes</span></h3>
+                    <p class="panel-subtitle" data-i18n="dash_popular_sub">Best-selling dishes loved by 10,000+ happy diners</p>
+                  </div>
+                  <a href="#menu" class="panel-link" data-i18n="dash_view_all_dishes">View Full Menu →</a>
+                </div>
+                <div class="dish-grid-home" id="homeDishesGrid">
+                  <!-- Injected dynamically by renderHomeDishes() -->
+                </div>
+              </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Recent Orders & Deals & Table Availability -->
+            <div class="dashboard-col-right">
+              <!-- RECENT ORDERS -->
+              <div class="dashboard-panel">
+                <div class="panel-header">
+                  <div>
+                    <h3 class="panel-title">📜 <span data-i18n="dash_recent_orders">Recent Orders</span></h3>
+                    <p class="panel-subtitle" data-i18n="dash_recent_orders_sub">Your latest orders and quick re-order actions</p>
+                  </div>
+                  <a href="#order-history" class="panel-link" data-i18n="dash_view_all_orders">View History →</a>
+                </div>
+                <div class="recent-orders-list" id="dashboardRecentOrdersList">
+                  <!-- Injected dynamically from past_orders_db -->
+                </div>
+              </div>
+
+              <!-- TODAY'S FEATURED DEALS SPOTLIGHT -->
+              <div class="dashboard-panel">
+                <div class="panel-header">
+                  <div>
+                    <h3 class="panel-title">🏷️ <span data-i18n="dash_featured_deals">Featured Special Combos</span></h3>
+                    <p class="panel-subtitle" data-i18n="dash_featured_deals_sub">Limited time value deals prepared fresh</p>
+                  </div>
+                  <a href="#offers" class="panel-link" data-i18n="dash_all_deals">All Deals →</a>
+                </div>
+                <div class="deals-spotlight-list" id="dashboardDealsSpotlight">
+                  <!-- Injected dynamically from DEALS_DATA -->
+                </div>
+              </div>
+
+              <!-- TABLE RESERVATION QUICK WIDGET -->
+              <div class="dashboard-panel table-spotlight-panel">
+                <div class="panel-header">
+                  <div>
+                    <h3 class="panel-title">📅 <span data-i18n="dash_table_status">Table Availability</span></h3>
+                    <p class="panel-subtitle">Madurai &amp; Chennai Dine-in</p>
+                  </div>
+                  <a href="#reservations" class="panel-link" data-i18n="dash_reserve_now">Reserve Table →</a>
+                </div>
+                <div class="table-quick-status-row" id="dashboardTableStatus">
+                  <!-- Live table booking status -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+    <!-- PAGE 2: AI HOTEL ASSISTANT (CONVERSATIONAL WORKSPACE + LIVE BILL) -->
+    <section class="page-view" id="view-ai-assistant">
+      <div class="app-shell hotel-agent-shell">
+
+        <!-- LEFT: CONVERSATIONAL PANEL -->
+        <section class="chat-panel">
+          <header class="chat-header">
+            <div class="brand">
+              <div class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 48 48" width="34" height="34">
+                  <path d="M24 4c-7 6-11 13-11 20a11 11 0 0 0 22 0c0-7-4-14-11-20Z" fill="var(--turmeric)"/>
+                  <path d="M24 4c-4 6-6 12-6 17a6 6 0 0 0 12 0c0-5-2-11-6-17Z" fill="var(--clay)"/>
+                </svg>
+              </div>
+              <div class="brand-text">
+                <h1>KPR Hotel AI Agent</h1>
+                <p class="tagline">24/7 Hotel Concierge · Rooms, Dining &amp; Live Bill · EN / TA / Tanglish</p>
+              </div>
+            </div>
+            <div class="header-right chat-header-actions">
+              <button class="menu-toggle-btn" id="menuToggleBtn" type="button" title="Browse full restaurant menu">🍽️ Browse Menu</button>
+              <button class="reset-chat-btn" id="resetChatBtn" type="button" title="Reset chat and start fresh session">🔄 Reset Chat</button>
+            </div>
+          </header>
+
+          <div class="menu-browser" id="menuBrowser" hidden>
+            <div class="meal-tabs" id="mealTabs">
+              <button class="meal-tab active" data-meal="breakfast">🌅 Breakfast</button>
+              <button class="meal-tab" data-meal="lunch">☀️ Lunch</button>
+              <button class="meal-tab" data-meal="dinner">🌙 Dinner</button>
+            </div>
+            <div class="meal-items" id="mealItems">
+              <p class="meal-loading">Loading menu…</p>
+            </div>
+          </div>
+
+          <div class="chat-scroll" id="chatScroll" aria-live="polite">
+            <!-- Messages injected dynamically -->
+          </div>
+
+          <div class="quick-chips" id="quickChips">
+            <button class="chip" data-msg="What rooms are available?">🏨 Available Rooms</button>
+            <button class="chip" data-msg="What is the price of the Deluxe room?">💰 Deluxe Room Price</button>
+            <button class="chip" data-msg="Does it include breakfast?">☕ Breakfast Included?</button>
+            <button class="chip" data-msg="Book the Deluxe room">🛏️ Book Deluxe Room</button>
+            <button class="chip" data-msg="Add two chicken biryanis">🍗 2 Chicken Biryani</button>
+            <button class="chip" data-msg="Add room service">🛎️ Add Room Service</button>
+            <button class="chip" data-msg="Show my bill">🧾 Show My Bill</button>
+            <button class="chip" data-msg="Pay my bill">💳 Pay Bill</button>
+          </div>
+
+          <div class="voice-lang-bar">
+            <span>🗣️ Speech &amp; Chat Language:</span>
+            <select id="chatVoiceLangSelect" class="lang-select-dropdown" title="Choose Language for Voice Recognition">
+              <option value="en-IN" selected>English (India)</option>
+              <option value="ta-IN">தமிழ் (Tamil)</option>
+              <option value="ta-Latn">Tanglish (தமிழ்)</option>
+              <option value="hi-IN">हिन्दी (Hindi)</option>
+              <option value="ml-IN">മലയാളം (Malayalam)</option>
+              <option value="te-IN">తెలుగు (Telugu)</option>
+              <option value="kn-IN">ಕನ್ನಡ (Kannada)</option>
+            </select>
+          </div>
+
+          <form class="composer" id="composerForm">
+            <button type="button" class="mic-btn" id="micBtn" aria-label="Record voice message" title="Click to speak">
+              <span class="mic-icon">🎙️</span>
+              <span class="mic-rings" aria-hidden="true"></span>
+            </button>
+            <input
+              type="text"
+              id="textInput"
+              placeholder="Ask about rooms, breakfast, order food, or check your bill..."
+              autocomplete="off"
+            />
+            <button type="submit" class="send-btn" id="sendMsgBtn" aria-label="Send message" title="Send message">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 11.5L21 3l-6 18-4-7-8-2.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            </button>
+          </form>
+
+          <div class="listening-pulse-card" id="recordingCard" style="display:none;">
+            <div class="listening-dot-live"></div>
+            <div style="flex:1;">
+              <strong id="recordingTitle" style="color:var(--chilli); font-size:14px;">🎙️ Listening...</strong>
+              <div id="recordingStatus" style="font-size:12px; color:#555;">Speak now... Click Done when finished.</div>
+            </div>
+            <button type="button" class="add-btn" id="stopRecordingBtn" style="padding:4px 10px; font-size:12px;">Done ✓</button>
+          </div>
+        </section>
+
+
+        <!-- RIGHT: LIVE HOTEL BILL PANEL (REAL-TIME SYNCHRONIZED) -->
+        <aside class="bill-panel" id="liveBillPanel" aria-label="Live Hotel Bill">
+          <div class="receipt live-hotel-receipt" id="receipt">
+            <div class="receipt-top-zigzag" aria-hidden="true"></div>
+            
+            <div class="receipt-header">
+              <div class="receipt-brand-row">
+                <span class="receipt-brand">KPR HOTEL</span>
+                <span class="bill-status-badge unpaid" id="billStatusBadge">UNPAID</span>
+              </div>
+              <p class="receipt-sub">Live Bill &amp; Order Summary · Real-Time Sync</p>
+              <p class="receipt-id" id="receiptSessionId">Session: —</p>
+            </div>
+
+            <div class="receipt-divider dashed"></div>
+
+            <!-- LIVE BILL CONTENT CONTAINER -->
+            <div class="live-bill-content" id="liveBillContent">
+
+              <!-- ROOM CHARGES SECTION -->
+              <div class="bill-section" id="billRoomsSection" style="display:none;">
+                <div class="bill-section-title">
+                  <span>🏨 ROOM CHARGES</span>
+                  <span class="bill-section-sub" id="billRoomsSubtotal">₹0.00</span>
+                </div>
+                <div class="bill-section-items" id="billRoomsList"></div>
+              </div>
+
+              <!-- FOOD ORDERS SECTION -->
+              <div class="bill-section" id="billFoodSection" style="display:none;">
+                <div class="bill-section-title">
+                  <span>🍛 FOOD ORDERS</span>
+                  <span class="bill-section-sub" id="billFoodSubtotal">₹0.00</span>
+                </div>
+                <div class="bill-section-items" id="billFoodList"></div>
+              </div>
+
+              <!-- HOTEL SERVICES SECTION -->
+              <div class="bill-section" id="billServicesSection" style="display:none;">
+                <div class="bill-section-title">
+                  <span>🛎️ HOTEL SERVICES</span>
+                  <span class="bill-section-sub" id="billServicesSubtotal">₹0.00</span>
+                </div>
+                <div class="bill-section-items" id="billServicesList"></div>
+              </div>
+
+              <!-- EMPTY BILL STATE -->
+              <div class="empty-bill-state" id="billEmptyState">
+                <span class="empty-bill-icon">📋</span>
+                <h4>Your Live Bill is Empty</h4>
+                <p>Ask the AI Agent to book a room (e.g. Deluxe Room), order food, or request hotel services!</p>
+              </div>
+
+            </div>
+
+            <div class="receipt-divider dashed"></div>
+
+            <!-- TOTALS BREAKDOWN -->
+            <div class="receipt-totals" id="receiptTotals" style="display:none;">
+              <div class="row" id="rowRoomSub" style="display:none;"><span>Rooms Subtotal</span><span id="totRoomSub">₹0.00</span></div>
+              <div class="row" id="rowFoodSub" style="display:none;"><span>Food Subtotal</span><span id="totFoodSub">₹0.00</span></div>
+              <div class="row" id="rowServiceSub" style="display:none;"><span>Services Subtotal</span><span id="totServiceSub">₹0.00</span></div>
+              <div class="row" id="rowDiscount" style="display:none; color:#2e7d32;"><span>Discount</span><span id="totDiscount">-₹0.00</span></div>
+              <div class="row"><span>GST (5%)</span><span id="totTax">₹0.00</span></div>
+              <div class="row" id="rowDelivery"><span>Delivery / Fees</span><span id="totDelivery">FREE</span></div>
+              <div class="row row-grand"><span>GRAND TOTAL</span><span id="totGrand" class="grand-highlight">₹0.00</span></div>
+            </div>
+
+            <!-- PAYMENT ACTION BUTTON / CONFIRMATION BANNER -->
+            <div class="bill-payment-actions" id="billPaymentActions">
+              <button type="button" class="pay-now-btn" id="billPayNowBtn" style="display:none;">
+                <span>💳 PAY NOW</span>
+                <span id="payBtnAmount">₹0.00</span>
+              </button>
+
+              <div class="paid-success-banner" id="billPaidBanner" style="display:none;">
+                <div class="paid-check-circle">✓</div>
+                <div class="paid-info">
+                  <strong>PAYMENT COMPLETED</strong>
+                  <div class="paid-sub" id="paidTxnLabel">Transaction: TXN-KPR</div>
+                  <div class="paid-sub" id="paidDateLabel">Paid Just Now</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="receipt-footer">
+              <div class="barcode" aria-hidden="true"></div>
+              <p>Thank you for choosing KPR Hotel 🙏</p>
+            </div>
+            <div class="receipt-bottom-zigzag" aria-hidden="true"></div>
+          </div>
+        </aside>
+
+      </div>
+
+      <!-- IN-PAGE PAYMENT MODAL (DIRECT PAYMENT INSIDE AGENT PAGE) -->
+      <div class="agent-payment-modal-backdrop" id="agentPaymentModal" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="payModalTitle">
+        <div class="agent-payment-modal-card">
+          <div class="modal-header">
+            <div>
+              <h3 id="payModalTitle" style="margin:0; font-family:'Fraunces', serif; color:var(--clay);">💳 Settle Hotel Bill</h3>
+              <p style="margin:2px 0 0 0; font-size:12px; color:#666;">Complete payment directly on the Agent page (Demo Gateway)</p>
+            </div>
+            <button type="button" class="modal-close-btn" id="closePaymentModalBtn" aria-label="Close payment modal">✕</button>
+          </div>
+
+          <div class="modal-bill-summary" id="modalBillSummary">
+            <div class="modal-summary-row" id="mRowRoom"><span>Room Charges</span><strong id="mValRoom">₹0.00</strong></div>
+            <div class="modal-summary-row" id="mRowFood"><span>Food Orders</span><strong id="mValFood">₹0.00</strong></div>
+            <div class="modal-summary-row" id="mRowServices"><span>Hotel Services</span><strong id="mValServices">₹0.00</strong></div>
+            <div class="modal-summary-row" id="mRowDiscount" style="display:none; color:#2e7d32;"><span>Discount</span><strong id="mValDiscount">-₹0.00</strong></div>
+            <div class="modal-summary-row"><span>GST Taxes (5%)</span><strong id="mValTax">₹0.00</strong></div>
+            <div class="modal-summary-divider"></div>
+            <div class="modal-summary-row grand"><span>TOTAL AMOUNT</span><strong id="mValGrand" style="color:var(--chilli); font-size:18px;">₹0.00</strong></div>
+          </div>
+
+          <div class="modal-payment-methods">
+            <label class="method-label">Choose Payment Method:</label>
+            <div class="method-options-grid">
+              <label class="method-radio-card active" data-method="UPI">
+                <input type="radio" name="payMethodChoice" value="UPI" checked />
+                <span class="radio-icon">📲</span>
+                <span class="radio-text"><strong>UPI</strong> (GPay, PhonePe, Paytm, QR)</span>
+              </label>
+              <label class="method-radio-card" data-method="Card">
+                <input type="radio" name="payMethodChoice" value="Card" />
+                <span class="radio-icon">💳</span>
+                <span class="radio-text"><strong>Card</strong> (Visa, MasterCard, RuPay)</span>
+              </label>
+              <label class="method-radio-card" data-method="Net Banking">
+                <input type="radio" name="payMethodChoice" value="Net Banking" />
+                <span class="radio-icon">🏦</span>
+                <span class="radio-text"><strong>Net Banking</strong> (SBI, HDFC, ICICI, etc.)</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" class="modal-submit-pay-btn" id="modalSubmitPayBtn">
+              <span id="modalPayBtnText">Pay Now (Demo Payment)</span>
+            </button>
+            <div class="modal-demo-note">⚡ Demo Mode: Instant simulated payment confirmation without bank charges</div>
+          </div>
+
+          <!-- SUCCESS STATE -->
+          <div class="modal-success-card" id="modalSuccessCard" style="display:none;">
+            <div class="success-icon-big">✓</div>
+            <h3>Payment Successful!</h3>
+            <p>Your payment has been verified and recorded.</p>
+            <div class="success-receipt-details">
+              <div>Amount Paid: <strong id="succAmount">₹0.00</strong></div>
+              <div>Transaction ID: <code id="succTxn">TXN-KPR</code></div>
+              <div>Status: <span class="paid-tag">PAID</span></div>
+            </div>
+            <button type="button" class="btn-success-done" id="succCloseBtn">Done &amp; View Paid Bill</button>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- PAGE 3: FULL MENU EXPLORER -->
+    <section class="page-view" id="view-menu">
+      <div class="page-header">
+        <h1>🍽️ Full Menu Catalog</h1>
+        <p>Explore our complete authentic South Indian menu with search and filters</p>
+      </div>
+
+      <div class="filter-bar">
+        <input type="text" id="menuSearchInput" class="search-input" placeholder="Search dishes e.g. Biryani, Dosa, Meals..." />
+        <div class="filter-pills">
+          <button class="filter-btn active" data-cat="all">All Items</button>
+          <button class="filter-btn" data-cat="veg">🌱 Pure Veg</button>
+          <button class="filter-btn" data-cat="non-veg">🍗 Non-Veg</button>
+          <button class="filter-btn" data-cat="Meals">🍛 Meals</button>
+          <button class="filter-btn" data-cat="Biryani">🍚 Biryani</button>
+          <button class="filter-btn" data-cat="Dosa">🥞 Dosa &amp; Tiffin</button>
+          <button class="filter-btn" data-cat="Beverages">☕ Beverages</button>
+        </div>
+      </div>
+
+      <div class="menu-grid" id="fullMenuGrid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- PAGE 4: DISH DETAIL MODAL / VIEW (DISH CUSTOMIZER STUDIO) -->
+    <section class="page-view" id="view-dish-detail">
+      <div class="page-header" style="text-align:center; margin-bottom:20px;">
+        <h1>⚙️ Dish Customizer Studio</h1>
+        <p>Personalize dish size, spice level, toppings, and special instructions with dynamic pricing</p>
+      </div>
+      <div class="dish-detail-container" id="dishDetailContent">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- PAGE 5: CART & CHECKOUT PAGE -->
+    <section class="page-view" id="view-cart-checkout">
+      <div class="checkout-grid">
+        <div class="checkout-left">
+          <h2>🛒 Review Your Cart</h2>
+          <div class="cart-full-list" id="cartFullList">
+            <!-- Rendered dynamically -->
+          </div>
+
+          <div class="delivery-address-card">
+            <h3>📍 Delivery &amp; Contact Details</h3>
+            <form id="checkoutAddressForm" class="form-grid">
+              <input type="text" id="chkCustName" placeholder="Full Name *" required />
+              <input type="tel" id="chkCustPhone" placeholder="Phone Number *" required />
+              <input type="text" id="chkCustAddress" placeholder="Delivery Address / Table Number *" required />
+              <input type="text" id="chkCustNotes" placeholder="Special Cooking Instructions (e.g. Extra spicy, less oil)" />
+            </form>
+          </div>
+        </div>
+
+        <div class="checkout-right">
+          <div class="summary-card">
+            <h3>🧾 Payment Summary</h3>
+            <div class="promo-input-group">
+              <input type="text" id="promoCodeInput" placeholder="Promo code (e.g. KPR15, KPR50, WELCOME)" />
+              <button id="applyPromoBtn">Apply</button>
+            </div>
+            <div id="promoFeedbackMsg" class="promo-feedback-success" style="display:none;"></div>
+            <div class="cost-rows">
+              <div class="cost-row"><span>Items Total</span><span id="chkSubtotal">₹0.00</span></div>
+              <div class="cost-row discount-row" id="chkDiscountRow" style="display:none;"><span>Coupon Discount</span><span id="chkDiscount">-₹0.00</span></div>
+              <div class="cost-row"><span>GST (5%)</span><span id="chkTax">₹0.00</span></div>
+              <div class="cost-row"><span>Delivery Fee</span><span id="chkDelivery">₹30.00</span></div>
+              <div class="cost-row row-total"><span>Grand Total</span><span id="chkGrand">₹30.00</span></div>
+            </div>
+            <button type="button" id="proceedToPayBtn" class="btn-primary full-width">Proceed to Payment ➔</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- PAGE 6: PAYMENT & UPI QR PORTAL -->
+    <section class="page-view" id="view-payment">
+      <div class="payment-portal-card">
+        <h2>📲 Complete Your Payment</h2>
+        <p>Choose your preferred payment mode for instant order processing</p>
+
+        <div class="pay-method-tabs" id="payMethodTabs">
+          <button class="pay-tab active" data-tab="upi">📲 Instant UPI QR</button>
+          <button class="pay-tab" data-tab="cash">💵 Cash on Delivery</button>
+          <button class="pay-tab" data-tab="card">💳 Credit / Debit Card</button>
+        </div>
+
+        <!-- TAB 1: UPI QR -->
+        <div class="pay-tab-body active" id="pay-body-upi">
+          <div class="upi-qr-display">
+            <div class="qr-image-wrapper">
+              <img id="portalQrImage" alt="UPI QR Code" src="" />
+            </div>
+            <p class="qr-hint">Scan with GPay, PhonePe, Paytm, or BHIM</p>
+            <h3 class="qr-amount-text" id="portalQrAmount">Total: ₹0.00</h3>
+            <p class="vpa-text">Merchant VPA: <code>kprhotel@upi</code></p>
+            <button class="btn-primary" id="portalConfirmPayBtn">I Have Paid (Simulate Success) ✓</button>
+          </div>
+        </div>
+
+        <!-- TAB 2: CASH ON DELIVERY -->
+        <div class="pay-tab-body" id="pay-body-cash" hidden>
+          <div class="cash-box">
+            <h3>💵 Pay with Cash Upon Delivery</h3>
+            <p>Your order will be prepared immediately. Pay the rider in cash when delivered.</p>
+            <div class="form-group" style="max-width:400px; margin: 16px auto;">
+              <label>Change Required (Optional)</label>
+              <select id="cashChangeNote">
+                <option value="none">Exact Change Ready</option>
+                <option value="500">Need change for ₹500 note</option>
+                <option value="2000">Need change for ₹2000 note</option>
+              </select>
+            </div>
+            <button class="btn-primary" id="confirmCashOrderBtn">Confirm Cash Order ✓</button>
+          </div>
+        </div>
+
+        <!-- TAB 3: CREDIT / DEBIT CARD -->
+        <div class="pay-tab-body" id="pay-body-card" hidden>
+          <form id="cardPaymentForm" class="res-form-grid" style="max-width:500px; margin: 0 auto; text-align:left;">
+            <div class="form-group full-width">
+              <label>Cardholder Name *</label>
+              <input type="text" id="cardHolderName" placeholder="e.g. Ramesh Kumar" required />
+            </div>
+            <div class="form-group full-width">
+              <label>16-Digit Card Number *</label>
+              <input type="text" id="cardNumber" placeholder="4532 1234 5678 9012" maxlength="19" required />
+            </div>
+            <div class="form-group">
+              <label>Expiry Date *</label>
+              <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" required />
+            </div>
+            <div class="form-group">
+              <label>CVV / CVC *</label>
+              <input type="password" id="cardCvv" placeholder="***" maxlength="4" required />
+            </div>
+            <button type="submit" class="btn-primary full-width" id="payCardBtn" style="margin-top:12px;">Pay via Credit/Debit Card ➔</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 7: LIVE ORDER PROGRESS TRACKER -->
+    <section class="page-view" id="view-order-status">
+      <div class="tracker-card">
+        <div class="tracker-header">
+          <span class="live-badge">🔴 LIVE TRACKING</span>
+          <h2 id="trackerOrderId">Order #KPR-8902</h2>
+          <p>Estimated Arrival: <strong id="trackerTimer">20:00 Mins</strong></p>
+        </div>
+
+        <!-- Live Step Progress Bar -->
+        <div class="timeline-steps" id="timelineSteps">
+          <div class="step completed" id="step-placed">
+            <div class="step-icon">✓</div>
+            <div class="step-info">
+              <h4>Order Placed</h4>
+              <p>Received by kitchen</p>
+            </div>
+          </div>
+          <div class="step active" id="step-cooking">
+            <div class="step-icon">🍳</div>
+            <div class="step-info">
+              <h4>Kitchen Preparing</h4>
+              <p>Chef is cooking your hot meals</p>
+            </div>
+          </div>
+          <div class="step" id="step-out">
+            <div class="step-icon">🛵</div>
+            <div class="step-info">
+              <h4>Out for Delivery</h4>
+              <p>Rider assigned</p>
+            </div>
+          </div>
+          <div class="step" id="step-delivered">
+            <div class="step-icon">🏠</div>
+            <div class="step-info">
+              <h4>Delivered</h4>
+              <p>Enjoy your meal!</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Delivery Driver Card -->
+        <div class="driver-card">
+          <div class="driver-avatar">👨‍✈️</div>
+          <div class="driver-info">
+            <h4>Delivery Partner: Muthu Kumar</h4>
+            <p>📞 +91 98765 43210 · Hero Splendor (TN 38 AB 1234)</p>
+          </div>
+          <div class="driver-actions" style="display:flex; gap:8px;">
+            <a href="tel:+919876543210" class="btn-outline">📞 Call Rider</a>
+            <a href="https://wa.me/919876543210" target="_blank" class="btn-secondary">💬 WhatsApp</a>
+          </div>
+        </div>
+
+        <!-- Order Items Summary in Tracker -->
+        <div class="tracker-order-summary" id="trackerOrderSummary" style="margin-top:20px; background:#fff; padding:18px; border-radius:12px; border:1px solid #eee; text-align:left;">
+          <!-- Dynamically populated -->
+        </div>
+
+        <!-- Animated Live Delivery Map Simulation -->
+        <div class="live-map-box" style="margin-top:24px; background:#fff; padding:20px; border-radius:12px; border:1px solid #eee;">
+          <h3>🗺️ Live Delivery Map Simulation</h3>
+          <div class="map-visual" style="position:relative; height:90px; background:linear-gradient(90deg, #F1E4D0 0%, #E2F0D9 100%); border-radius:10px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; overflow:hidden;">
+            <div class="map-pin rest-pin" style="font-weight:700; color:var(--clay);">🏬 KPR Kitchen</div>
+            <div class="map-rider-icon" id="mapRiderIcon" style="position:absolute; left:20%; font-size:24px; transition:left 3s ease-in-out;">🛵</div>
+            <div class="map-pin customer-pin" style="font-weight:700; color:var(--banana-leaf);">🏠 Destination</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- PAGE 8: PAST ORDERS & RE-ORDER -->
+    <section class="page-view" id="view-order-history">
+      <div class="page-header">
+        <h1>📜 Your Past Orders</h1>
+        <p>Re-order your favorite meals with 1-click</p>
+      </div>
+      <div class="order-history-list" id="orderHistoryList">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- PAGE 9: FAVORITES & BOOKMARKS -->
+    <section class="page-view" id="view-favorites">
+      <div class="page-header">
+        <h1>❤️ Saved Favorites</h1>
+        <p>Your bookmarked dishes for quick ordering</p>
+      </div>
+      <div class="favorites-grid" id="favoritesGrid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- PAGE 10: SPECIAL OFFERS & FESTIVAL COMBOS -->
+    <section class="page-view" id="view-offers">
+      <div class="page-header" style="text-align:center;">
+        <h1>🏷️ Special Deals &amp; Value Combos</h1>
+        <p>Save up to 30% with chef-curated combos and feast packages</p>
+      </div>
+
+      <div class="deals-grid-container" id="dealsGrid">
+        <!-- Deal 1: Biryani + Starter + Drink -->
+        <div class="deal-card">
+          <div class="deal-img-box">
+            <img src="assets/dishes/deal-biryani-combo.jpg" alt="South Indian Biryani Feast Combo" onerror="this.onerror=null; this.src='assets/dishes/bir-001.jpg'" />
+            <span class="deal-tag-badge">🔥 BESTSELLER</span>
+            <span class="deal-save-badge">24% OFF</span>
+          </div>
+          <div class="deal-body">
+            <h3 class="deal-title">Biryani + Starter + Drink Combo</h3>
+            <p class="deal-desc">Seeraga Samba Chicken Biryani + Spiced Chicken 65 + Onion Raita + Chilled Madurai Jigarthanda Drink.</p>
+            <div class="deal-price-row">
+              <span class="deal-offer-price">₹319</span>
+              <span class="deal-orig-price">₹420</span>
+            </div>
+            <div class="deal-actions-row">
+              <button class="btn-outline" style="flex:1;" onclick="window.viewDealDetail('biryani-combo')">View Details</button>
+              <button class="btn-primary" style="flex:1;" onclick="window.addDealToCart('biryani-combo')">+ Add to Cart</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Deal 2: Family Combo -->
+        <div class="deal-card">
+          <div class="deal-img-box">
+            <img src="assets/dishes/deal-family-feast.jpg" alt="South Indian Family Feast" onerror="this.onerror=null; this.src='assets/dishes/bir-001.jpg'" />
+            <span class="deal-tag-badge">👑 FAMILY FEAST</span>
+            <span class="deal-save-badge">24% OFF</span>
+          </div>
+          <div class="deal-body">
+            <h3 class="deal-title">South Indian Family Mega Feast</h3>
+            <p class="deal-desc">2x Chicken Biryani + 1x Chettinad Chicken Curry + 4x Malabar Parotta + 2x Traditional Filter Coffee.</p>
+            <div class="deal-price-row">
+              <span class="deal-offer-price">₹749</span>
+              <span class="deal-orig-price">₹980</span>
+            </div>
+            <div class="deal-actions-row">
+              <button class="btn-outline" style="flex:1;" onclick="window.viewDealDetail('family-feast')">View Details</button>
+              <button class="btn-primary" style="flex:1;" onclick="window.addDealToCart('family-feast')">+ Add to Cart</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Deal 3: Morning Tiffin Combo -->
+        <div class="deal-card">
+          <div class="deal-img-box">
+            <img src="assets/dishes/dosa-001.jpg" alt="Morning Tiffin Combo" onerror="this.onerror=null; this.src='assets/dishes/bir-001.jpg'" />
+            <span class="deal-tag-badge">🌅 MORNING TIFFIN</span>
+            <span class="deal-save-badge">27% OFF</span>
+          </div>
+          <div class="deal-body">
+            <h3 class="deal-title">Morning Tiffin Grand Combo</h3>
+            <p class="deal-desc">1x Crispy Ghee Roast Dosa + 2x Medu Vada + 2x Soft Steamed Idli + 1x Hot Kumbakonam Degree Filter Coffee.</p>
+            <div class="deal-price-row">
+              <span class="deal-offer-price">₹189</span>
+              <span class="deal-orig-price">₹260</span>
+            </div>
+            <div class="deal-actions-row">
+              <button class="btn-outline" style="flex:1;" onclick="window.viewDealDetail('tiffin-combo')">View Details</button>
+              <button class="btn-primary" style="flex:1;" onclick="window.addDealToCart('tiffin-combo')">+ Add to Cart</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Deal 4: Burger + Fries + Coke -->
+        <div class="deal-card">
+          <div class="deal-img-box">
+            <img src="assets/dishes/deal-burger-combo.jpg" alt="Burger + Fries + Coke Combo" onerror="this.onerror=null; this.src='assets/dishes/bir-001.jpg'" />
+            <span class="deal-tag-badge">🍔 QUICK BITE</span>
+            <span class="deal-save-badge">29% OFF</span>
+          </div>
+          <div class="deal-body">
+            <h3 class="deal-title">Burger + Fries + Coke Combo</h3>
+            <p class="deal-desc">Juicy gourmet spiced patty burger with fresh lettuce &amp; melted cheese + Peri-Peri seasoned golden fries + Chilled Coke.</p>
+            <div class="deal-price-row">
+              <span class="deal-offer-price">₹249</span>
+              <span class="deal-orig-price">₹350</span>
+            </div>
+            <div class="deal-actions-row">
+              <button class="btn-outline" style="flex:1;" onclick="window.viewDealDetail('burger-combo')">View Details</button>
+              <button class="btn-primary" style="flex:1;" onclick="window.addDealToCart('burger-combo')">+ Add to Cart</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Deal 5: Pizza + Garlic Bread + Coke -->
+        <div class="deal-card">
+          <div class="deal-img-box">
+            <img src="assets/dishes/deal-pizza-combo.jpg" alt="Pizza + Garlic Bread + Coke Combo" onerror="this.onerror=null; this.src='assets/dishes/bir-001.jpg'" />
+            <span class="deal-tag-badge">🍕 FEAST COMBO</span>
+            <span class="deal-save-badge">27% OFF</span>
+          </div>
+          <div class="deal-body">
+            <h3 class="deal-title">Pizza + Garlic Bread + Drink Combo</h3>
+            <p class="deal-desc">Freshly baked woodfire supreme pizza with melted mozzarella + 3x Crunchy cheesy garlic bread slices + Cold beverage.</p>
+            <div class="deal-price-row">
+              <span class="deal-offer-price">₹379</span>
+              <span class="deal-orig-price">₹520</span>
+            </div>
+            <div class="deal-actions-row">
+              <button class="btn-outline" style="flex:1;" onclick="window.viewDealDetail('pizza-combo')">View Details</button>
+              <button class="btn-primary" style="flex:1;" onclick="window.addDealToCart('pizza-combo')">+ Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 11: TABLE RESERVATION & BOOKING -->
+    <section class="page-view" id="view-reservations">
+      <div class="reservation-card">
+        <div class="page-header" style="text-align:center;">
+          <h1>📅 Reserve a Dining Table</h1>
+          <p>Book your table at KPR Hotel in advance with live seating map status</p>
+        </div>
+
+        <div style="width:100%; height:200px; border-radius:12px; overflow:hidden; margin-bottom:20px; box-shadow:0 4px 14px rgba(0,0,0,0.1);">
+          <img src="assets/dishes/table-ambience.jpg" alt="KPR Dining Hall Ambience" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null; this.src='assets/dishes/bir-001.jpg'" />
+        </div>
+
+        <!-- Interactive Visual Table Seating Map Grid -->
+        <div class="table-map-wrapper" style="margin-bottom: 24px; background:#fff; padding:20px; border-radius:12px; border:1px solid #eee;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+            <h3 style="margin:0;">🪑 Live Dining Room Table Map</h3>
+            <div style="display:flex; gap:12px; font-size:12px; font-weight:700;">
+              <span style="color:var(--banana-leaf);">🟢 Available</span>
+              <span style="color:var(--chilli);">🔴 Booked</span>
+              <span style="color:#2E7D32;">⭐ Selected</span>
+            </div>
+          </div>
+          <p style="font-size:13px; color:#666; margin-bottom:14px;">Select an available table to book for your selected date &amp; time. Booked tables cannot be re-selected.</p>
+          <div class="table-map-grid" id="tableMapGrid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap:12px;">
+            <!-- Rendered dynamically -->
+          </div>
+          <input type="hidden" id="selectedTableId" value="Table 1" />
+        </div>
+
+
+        <form id="reservationForm" class="res-form-grid">
+
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" id="resName" required placeholder="Karthik R" />
+          </div>
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" id="resPhone" required placeholder="+91 98400 12345" />
+          </div>
+          <div class="form-group">
+            <label>Date *</label>
+            <input type="date" id="resDate" required min="2026-09-30" max="2027-12-31" />
+          </div>
+          <div class="form-group">
+            <label>Time Slot *</label>
+            <select id="resTime">
+              <option value="12:30 PM (Lunch)">12:30 PM (Lunch)</option>
+              <option value="01:30 PM (Lunch)">01:30 PM (Lunch)</option>
+              <option value="07:30 PM (Dinner)" selected>07:30 PM (Dinner)</option>
+              <option value="08:30 PM (Dinner)">08:30 PM (Dinner)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Number of Guests *</label>
+            <input type="number" id="resGuests" min="1" max="20" value="4" required />
+          </div>
+          <div class="form-group">
+            <label>Seating Preference</label>
+            <select id="resTableType">
+              <option value="standard">Standard Family Table</option>
+              <option value="ac">A/C Dining Hall</option>
+              <option value="private">Private Family Booth</option>
+            </select>
+          </div>
+          <div class="form-group full-width">
+            <label>Special Requests</label>
+            <input type="text" id="resRequests" placeholder="High chair needed, birthday celebration, etc." />
+          </div>
+          <button type="submit" class="btn-primary full-width">Confirm Table Booking</button>
+        </form>
+        <div id="resResultMsg" class="res-result" hidden></div>
+      </div>
+    </section>
+
+    <!-- PAGE 12: CATERING & BULK PARTY ORDERS -->
+    <section class="page-view" id="view-catering">
+      <div class="catering-card">
+        <div class="page-header">
+          <h1>🎉 Bulk Catering &amp; Event Orders</h1>
+          <p>We cater weddings, corporate lunches, and family celebrations with authentic banana leaf service</p>
+        </div>
+        <form id="cateringForm" class="res-form-grid">
+          <div class="form-group">
+            <label>Contact Name *</label>
+            <input type="text" id="catName" required placeholder="Santhosh Kumar" />
+          </div>
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" id="catPhone" required placeholder="+91 94440 98765" />
+          </div>
+          <div class="form-group">
+            <label>Event Type *</label>
+            <select id="catEvent">
+              <option>Wedding Reception</option>
+              <option>Corporate Lunch</option>
+              <option>Birthday Party</option>
+              <option>Housewarming (Gribhapravesham)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Estimated Guest Count *</label>
+            <input type="number" id="catGuests" min="20" max="1000" value="100" required />
+          </div>
+          <div class="form-group">
+            <label>Event Date *</label>
+            <input type="date" id="catDate" required />
+          </div>
+          <div class="form-group">
+            <label>Menu Preference</label>
+            <select id="catMenuType">
+              <option>Grand Non-Veg Feast (Biryani + Starters)</option>
+              <option>Traditional Veg Banana Leaf Meals</option>
+              <option>Custom Buffet Menu</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-primary full-width">Request Catering Estimate</button>
+        </form>
+        <div id="cateringResultMsg" class="res-result" hidden></div>
+      </div>
+    </section>
+
+    <!-- PAGE 13: CHEF'S SPECIAL & TODAY'S MENU -->
+    <section class="page-view" id="view-specials">
+      <div class="page-header">
+        <h1>👨‍🍳 Today's Chef Specials</h1>
+        <p>Hand-crafted regional specialties cooked daily over traditional woodfire</p>
+      </div>
+      <div class="specials-grid" id="specialsGrid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- PAGE 14: KITCHEN LIVE DASHBOARD (KDS) -->
+    <section class="page-view" id="view-kitchen-admin">
+      <div class="page-header">
+        <h1>👨‍🍳 Kitchen Display System (KDS Live Admin)</h1>
+        <p>Manage active kitchen tickets and order status in real time</p>
+      </div>
+
+      <div class="kds-board">
+        <div class="kds-col">
+          <h3 class="col-title pending">📥 Pending Orders</h3>
+          <div class="kds-list" id="kdsPending"></div>
+        </div>
+
+        <div class="kds-col">
+          <h3 class="col-title cooking">🔥 Cooking</h3>
+          <div class="kds-list" id="kdsCooking"></div>
+        </div>
+
+        <div class="kds-col">
+          <h3 class="col-title ready">✅ Ready for Pickup / Delivery</h3>
+          <div class="kds-list" id="kdsReady"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 15: RESTAURANT ANALYTICS & AI INSIGHTS -->
+    <section class="page-view" id="view-analytics">
+      <div class="page-header">
+        <h1>📊 Restaurant Analytics &amp; AI Metrics</h1>
+        <p>Real-time revenue, order metrics, and NLP intent resolution performance</p>
+      </div>
+
+      <div class="analytics-grid">
+        <div class="metric-card">
+          <h4>Today's Revenue</h4>
+          <h2 id="anRev">₹48,250</h2>
+          <span class="metric-sub">+18% vs yesterday</span>
+        </div>
+        <div class="metric-card">
+          <h4>Total Orders</h4>
+          <h2 id="anOrders">142</h2>
+          <span class="metric-sub">Average ticket ₹340</span>
+        </div>
+        <div class="metric-card">
+          <h4>AI Intent Accuracy</h4>
+          <h2 id="anAccuracy">96.4%</h2>
+          <span class="metric-sub">NLP intent parser</span>
+        </div>
+        <div class="metric-card">
+          <h4>Top Language</h4>
+          <h2>Tanglish (45%)</h2>
+          <span class="metric-sub">EN: 42% | TA: 13%</span>
+        </div>
+      </div>
+
+      <div class="analytics-charts">
+        <div class="chart-box">
+          <h3>🔥 Top Selling Dishes Today</h3>
+          <div class="dish-bar-list" id="anTopDishes">
+            <p>Loading dish analytics...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 16: MENU ITEM MANAGER -->
+    <section class="page-view" id="view-menu-admin">
+      <div class="page-header">
+        <h1>🛠️ Menu Stock &amp; Price Manager</h1>
+        <p>Update dish availability status and price adjustments</p>
+      </div>
+      <div class="admin-table-container">
+        <table class="admin-table" id="menuAdminTable">
+          <thead>
+            <tr>
+              <th>Dish ID</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Price (₹)</th>
+              <th>Stock Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="menuAdminTbody">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PAGE 17: ABOUT US & HERITAGE -->
+    <section class="page-view" id="view-about">
+      <div class="about-card">
+        <h1>🏛️ The Legacy of KPR Hotel</h1>
+        <p class="lead">Established in 1998 in Madurai, KPR Hotel has been serving authentic South Indian Tamil Nadu cuisine prepared with freshly ground spices, cold-pressed sesame oil, and traditional woodfire cooking techniques.</p>
+
+        <div class="about-pillars">
+          <div class="pillar">
+            <h3>🌾 Pure Seeraga Samba Rice</h3>
+            <p>Our Biryanis use authentic aromatic Seeraga Samba rice sourced directly from farmers in Tanjore.</p>
+          </div>
+          <div class="pillar">
+            <h3>🔥 Woodfire Cooking</h3>
+            <p>Slow cooked in heavy brass degs over wood fires for signature smoky flavor and tenderness.</p>
+          </div>
+          <div class="pillar">
+            <h3>🍃 Fresh Banana Leaf Service</h3>
+            <p>Traditional eco-friendly banana leaf meals served with unlimited sambar, rasam, and kootu.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 18: NUTRITIONAL & ALLERGEN GUIDE -->
+    <section class="page-view" id="view-nutrition">
+      <div class="page-header">
+        <h1>🥗 Nutrition &amp; Allergen Guide</h1>
+        <p>Caloric breakdown and dietary safety information for KPR Hotel menu items</p>
+      </div>
+      <div class="nutrition-grid" id="nutritionGrid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- PAGE 19: CUSTOMER REVIEWS & TESTIMONIALS -->
+    <section class="page-view" id="view-reviews">
+      <div class="reviews-layout">
+        <div class="reviews-left">
+          <h2>💬 What Our Customers Say</h2>
+          <div class="reviews-list" id="reviewsList">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <div class="reviews-right">
+          <div class="review-form-card">
+            <h3>⭐ Leave a Review</h3>
+            <form id="addReviewForm">
+              <input type="text" id="revAuthor" required placeholder="Your Name" />
+              <select id="revRating">
+                <option value="5">⭐⭐⭐⭐⭐ (5/5)</option>
+                <option value="4">⭐⭐⭐⭐ (4/5)</option>
+                <option value="3">⭐⭐⭐ (3/5)</option>
+              </select>
+              <textarea id="revComment" required placeholder="Write your review..."></textarea>
+              <button type="submit" class="btn-primary full-width">Submit Review</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 20: HELP CENTER, FAQ & CONTACT -->
+    <section class="page-view" id="view-help-contact">
+      <div class="help-grid">
+        <div class="help-left">
+          <h2>❓ Frequently Asked Questions</h2>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>How does the AI Voice ordering agent work?</summary>
+              <p>Press the microphone button and speak in English, Tamil, or Tanglish (transliterated Tamil like "Enaku 2 biryani venum"). The AI detects your language, parses your order, and adds it to your live cart.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What payment methods are supported?</summary>
+              <p>We support instant UPI QR codes (scannable via GPay, PhonePe, Paytm), Cash on Delivery, and Credit/Debit cards.</p>
+            </details>
+            <details class="faq-item">
+              <summary>What are your operating hours?</summary>
+              <p>Open daily from 7:00 AM to 11:00 PM for breakfast, lunch, dinner, and late-night snacks.</p>
+            </details>
+          </div>
+        </div>
+
+        <div class="help-right">
+          <div class="contact-card">
+            <h2>📞 Contact &amp; Branch Locations</h2>
+            <p><strong>Madurai Main Branch:</strong> #14 West Tower Street, Near Meenakshi Temple, Madurai - 625001</p>
+            <p><strong>Chennai Branch:</strong> #88 Anna Salai, T. Nagar, Chennai - 600017</p>
+            <p><strong>Phone:</strong> +91 452 234 5678 / +91 98400 11223</p>
+            <p><strong>Email:</strong> support@kprhotel.in</p>
+          </div>
+        </div>
+      </div>
+    </section>
+ 
+     <!-- PAGE 21: APPLICATION SETTINGS WORKSPACE -->
+     <section class="page-view" id="view-settings">
+       <div class="page-header" style="text-align:center; margin-bottom:28px;">
+         <h1>⚙️ <span data-i18n="nav_settings">Application Settings</span></h1>
+         <p>Personalize your language, display theme, color accents, and voice preferences</p>
+       </div>
+ 
+       <div class="settings-page-grid">
+         <!-- 1. LANGUAGE SETTINGS -->
+         <div class="settings-card">
+           <div class="settings-card-header">
+             <h3>🌐 <span data-i18n="nav_language">Language &amp; Localization</span></h3>
+             <p>Select your preferred platform language. Updates all menus, badges, buttons, and AI interactions.</p>
+           </div>
+           <div class="lang-pills-grid">
+             <button type="button" class="lang-pill-btn active" id="langPillEn" data-lang="en-IN" onclick="window.setAppLanguage('en-IN')">
+               <span class="pill-title">English</span>
+               <span class="pill-desc">Default (Madurai &amp; Chennai)</span>
+             </button>
+             <button type="button" class="lang-pill-btn" id="langPillTa" data-lang="ta-IN" onclick="window.setAppLanguage('ta-IN')">
+               <span class="pill-title">தமிழ் (Tamil)</span>
+               <span class="pill-desc">பாரம்பரிய தமிழ் மொழி</span>
+             </button>
+             <button type="button" class="lang-pill-btn" id="langPillTang" data-lang="ta-Latn" onclick="window.setAppLanguage('ta-Latn')">
+               <span class="pill-title">Tanglish</span>
+               <span class="pill-desc">Tamil in English Script</span>
+             </button>
+           </div>
+         </div>
+ 
+         <!-- 2. THEME SETTINGS -->
+         <div class="settings-card">
+           <div class="settings-card-header">
+             <h3>🎨 <span>Display Theme Mode</span></h3>
+             <p>Choose between light parchment, dark heritage, or system adaptive appearance.</p>
+           </div>
+           <div class="theme-cards-grid">
+             <div class="theme-card-option" id="themeOptLight" onclick="window.setAppTheme('light')">
+               <div class="theme-preview light-prev">
+                 <div class="prev-header"></div>
+                 <div class="prev-content"></div>
+               </div>
+               <div class="theme-label">
+                 <strong>☀ Light Mode</strong>
+                 <span>Crisp &amp; vibrant daytime dining</span>
+               </div>
+             </div>
+ 
+             <div class="theme-card-option active" id="themeOptDark" onclick="window.setAppTheme('dark')">
+               <div class="theme-preview dark-prev">
+                 <div class="prev-header"></div>
+                 <div class="prev-content"></div>
+               </div>
+               <div class="theme-label">
+                 <strong>🌙 Dark Mode</strong>
+                 <span>Deep obsidian &amp; glowing turmeric</span>
+               </div>
+             </div>
+ 
+             <div class="theme-card-option" id="themeOptSystem" onclick="window.setAppTheme('system')">
+               <div class="theme-preview system-prev">
+                 <div class="prev-header"></div>
+                 <div class="prev-content"></div>
+               </div>
+               <div class="theme-label">
+                 <strong>💻 System Default</strong>
+                 <span>Match your OS preferences</span>
+               </div>
+             </div>
+           </div>
+         </div>
+ 
+         <!-- 3. ACCENT COLOR CUSTOMIZATION -->
+         <div class="settings-card">
+           <div class="settings-card-header">
+             <h3>✨ <span>Accent Color Palette</span></h3>
+             <p>Customize primary highlights, active sidebar states, buttons, links, and action badges.</p>
+           </div>
+           <div class="accent-swatches-grid">
+             <button type="button" class="accent-swatch active" data-accent="gold" onclick="window.setAppAccent('gold')" style="--swatch-color:#E3A426;">
+               <span class="swatch-circle" style="background:#E3A426;"></span>
+               <span class="swatch-name">KPR Gold (Turmeric)</span>
+             </button>
+             <button type="button" class="accent-swatch" data-accent="red" onclick="window.setAppAccent('red')" style="--swatch-color:#C1442D;">
+               <span class="swatch-circle" style="background:#C1442D;"></span>
+               <span class="swatch-name">Madurai Red (Clay)</span>
+             </button>
+             <button type="button" class="accent-swatch" data-accent="green" onclick="window.setAppAccent('green')" style="--swatch-color:#2E7D32;">
+               <span class="swatch-circle" style="background:#2E7D32;"></span>
+               <span class="swatch-name">Banana Leaf Green</span>
+             </button>
+             <button type="button" class="accent-swatch" data-accent="blue" onclick="window.setAppAccent('blue')" style="--swatch-color:#1976D2;">
+               <span class="swatch-circle" style="background:#1976D2;"></span>
+               <span class="swatch-name">Royal Sapphire Blue</span>
+             </button>
+             <button type="button" class="accent-swatch" data-accent="purple" onclick="window.setAppAccent('purple')" style="--swatch-color:#7B1FA2;">
+               <span class="swatch-circle" style="background:#7B1FA2;"></span>
+               <span class="swatch-name">Chettinad Purple</span>
+             </button>
+           </div>
+         </div>
+ 
+         <!-- 4. AUDIO & NOTIFICATIONS & SESSION -->
+         <div class="settings-card">
+           <div class="settings-card-header">
+             <h3>🔊 <span>AI Voice &amp; System Preferences</span></h3>
+             <p>Fine-tune voice synthesizer behavior and order notification chimes.</p>
+           </div>
+           <div class="settings-toggle-list">
+             <label class="settings-toggle-row">
+               <div>
+                 <strong>🔊 Spoken AI Audio Replies (TTS)</strong>
+                 <p style="margin:2px 0 0 0; font-size:12px; color:#A99990;">Read out AI assistant responses automatically with natural accents</p>
+               </div>
+               <input type="checkbox" id="settingTtsPage" checked onchange="window.saveSettings()" />
+             </label>
+             <label class="settings-toggle-row" style="margin-top:10px;">
+               <div>
+                 <strong>🔔 Live Kitchen &amp; Tracker Alerts</strong>
+                 <p style="margin:2px 0 0 0; font-size:12px; color:#A99990;">Display real-time cooking and delivery progress banner toasts</p>
+               </div>
+               <input type="checkbox" id="settingNotifyPage" checked onchange="window.saveSettings()" />
+             </label>
+           </div>
+ 
+           <div style="margin-top:20px; padding-top:16px; border-top:1px solid rgba(227,164,38,0.2); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+             <button type="button" class="btn-outline" style="border-color:#C1442D; color:#C1442D;" onclick="window.resetCartSession()">🗑️ Reset Cart &amp; Session</button>
+             <span style="font-size:12px; color:#A99990;">Settings are automatically saved &amp; persist across reloads.</span>
+           </div>
+         </div>
+       </div>
+     </section>
+ 
+       </main> <!-- close page-content-area -->
+    </div> <!-- close main-content-wrap -->
+  </div> <!-- close app-layout -->
+
+  <!-- ================= SETTINGS MODAL DIALOG ================= -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="special-order-dialog" style="max-width:520px;">
+      <button class="modal-close-x" onclick="window.closeSettingsModal()" title="Close">✕</button>
+      <div style="padding:24px;">
+        <h2 style="font-family:'Fraunces',serif; font-size:24px; margin:0 0 8px 0; color:var(--charcoal);">⚙️ Application Settings</h2>
+        <p style="font-size:13px; color:#666; margin-bottom:20px;">Customize your KPR Hotel experience, voice preferences, and notifications.</p>
+
+        <div class="settings-group">
+          <label class="settings-toggle-row">
+            <div>
+              <div style="font-weight:700; font-size:14px; color:var(--charcoal);">🔊 AI Voice &amp; TTS Audio Replies</div>
+              <div style="font-size:12px; color:#777;">Synthesize spoken Tamil/English replies automatically</div>
+            </div>
+            <input type="checkbox" id="settingTtsToggle" checked onchange="window.saveSettings()" />
+          </label>
+        </div>
+
+        <div class="settings-group" style="margin-top:14px;">
+          <label class="settings-toggle-row">
+            <div>
+              <div style="font-weight:700; font-size:14px; color:var(--charcoal);">🔔 Live Order Status Alerts</div>
+              <div style="font-size:12px; color:#777;">Show banner notifications when cooking stages update</div>
+            </div>
+            <input type="checkbox" id="settingNotifyToggle" checked onchange="window.saveSettings()" />
+          </label>
+        </div>
+
+        <div class="settings-group" style="margin-top:14px;">
+          <label style="display:block; font-weight:700; font-size:14px; margin-bottom:6px; color:var(--charcoal);">🏢 Preferred Branch Location</label>
+          <select id="settingBranchSelect" class="form-select" onchange="window.saveSettings()" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; font-family:inherit;">
+            <option value="madurai">Madurai Main (Near Meenakshi Temple)</option>
+            <option value="chennai">Chennai Branch (Anna Salai, T. Nagar)</option>
+          </select>
+        </div>
+
+        <div class="settings-group" style="margin-top:14px;">
+          <label style="display:block; font-weight:700; font-size:14px; margin-bottom:6px; color:var(--charcoal);">🌶️ Default Dietary Filter</label>
+          <select id="settingDietSelect" class="form-select" onchange="window.saveSettings()" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; font-family:inherit;">
+            <option value="all">Show All Items (Veg &amp; Non-Veg)</option>
+            <option value="veg">Pure Vegetarian Only 🌱</option>
+            <option value="nonveg">Non-Vegetarian Only 🍗</option>
+          </select>
+        </div>
+
+        <div style="border-top:1px solid #eee; margin-top:20px; padding-top:16px; display:flex; justify-content:space-between; align-items:center;">
+          <button type="button" class="btn-outline" style="border-color:#C1442D; color:#C1442D; cursor:pointer;" onclick="window.resetCartSession()">🗑️ Reset Cart &amp; Session</button>
+          <button type="button" class="btn-primary" onclick="window.closeSettingsModal()">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SPECIAL ORDER MODAL DIALOG ================= -->
+  <div class="modal-overlay" id="specialOrderModal">
+    <div class="special-order-dialog">
+      <button class="modal-close-x" onclick="window.closeSpecialOrderModal()" title="Close">✕</button>
+      <div style="padding:24px;">
+        <div style="display:flex; gap:20px; align-items:center; flex-wrap:wrap; margin-bottom:18px;">
+          <img id="spModalImg" src="assets/dishes/special-kari-dosa.jpg" alt="Chef Special Order" style="width:140px; height:120px; object-fit:cover; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.15);" onerror="this.onerror=null; this.src='assets/dishes/bir-001.jpg'" />
+          <div style="flex:1;">
+            <span class="dish-badge-nonveg" id="spModalBadge">⭐ CHEF'S SPECIAL SELECTION</span>
+            <h2 id="spModalTitle" style="font-family:'Fraunces',serif; font-size:24px; margin:6px 0 4px 0; color:var(--charcoal);">Madurai Mutton Kari Dosa</h2>
+            <div style="font-size:18px; color:var(--clay); font-weight:800;" id="spModalBasePrice">₹280</div>
+            <p id="spModalDesc" style="font-size:13px; color:#555; margin:6px 0 0 0; line-height:1.4;">Crispy golden fermented dosa layered with spicy minced mutton keema, fried egg, and rich Chettinad spices.</p>
+          </div>
+        </div>
+
+        <div style="border-top:1px solid #eee; padding-top:16px;">
+          <div class="option-group">
+            <h4>🔥 Select Preparation Style</h4>
+            <div class="size-pill-group">
+              <label class="size-pill-label active">
+                <input type="radio" name="spPrepStyle" value="Woodfire Claypot" checked />
+                <span>Woodfire Cooked</span>
+                <span style="font-size:11px; color:#666;">Original Recipe</span>
+              </label>
+              <label class="size-pill-label">
+                <input type="radio" name="spPrepStyle" value="Banana Leaf Steamed" />
+                <span>Banana Leaf Packed</span>
+                <span style="font-size:11px; color:#666;">Aromatic Infusion</span>
+              </label>
+              <label class="size-pill-label">
+                <input type="radio" name="spPrepStyle" value="Crispy Dry Roast" />
+                <span>Crispy Dry Roast</span>
+                <span style="font-size:11px; color:#666;">Extra Crunch</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="option-group">
+            <h4>🌶️ Spice Level</h4>
+            <div style="display:flex; gap:16px; flex-wrap:wrap; font-size:13px;">
+              <label style="cursor:pointer; display:flex; align-items:center; gap:6px;"><input type="radio" name="spSpice" value="Mild" /> Mild 🌶️</label>
+              <label style="cursor:pointer; display:flex; align-items:center; gap:6px;"><input type="radio" name="spSpice" value="Medium" checked /> Medium 🌶️🌶️</label>
+              <label style="cursor:pointer; display:flex; align-items:center; gap:6px;"><input type="radio" name="spSpice" value="Chef Extra Spicy" /> Chef Special Spicy 🌶️🌶️🌶️</label>
+            </div>
+          </div>
+
+          <div class="option-group">
+            <h4>🧀 Custom Requirements &amp; Additions</h4>
+            <div class="addon-grid-container">
+              <label class="addon-card-label">
+                <input type="checkbox" class="sp-addon" value="Extra Salna Gravy" data-price="30" />
+                <span>Extra Salna Gravy</span>
+                <span class="addon-price-tag">+₹30</span>
+              </label>
+              <label class="addon-card-label">
+                <input type="checkbox" class="sp-addon" value="Boneless Meat Cut" data-price="50" />
+                <span>Boneless Meat Cut</span>
+                <span class="addon-price-tag">+₹50</span>
+              </label>
+              <label class="addon-card-label">
+                <input type="checkbox" class="sp-addon" value="Pure Ghee Topping" data-price="35" />
+                <span>Pure Ghee Topping</span>
+                <span class="addon-price-tag">+₹35</span>
+              </label>
+              <label class="addon-card-label">
+                <input type="checkbox" class="sp-addon" value="Boiled Egg" data-price="20" />
+                <span>Boiled Egg</span>
+                <span class="addon-price-tag">+₹20</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="option-group">
+            <h4>📝 Special Instructions for Kitchen</h4>
+            <textarea id="spInstructions" placeholder="e.g. Less oil, extra pepper, pack gravy separately in silver pouch..." style="width:100%; border-radius:8px; border:1px solid #ccc; padding:10px; font-family:inherit; font-size:13px;" rows="2"></textarea>
+          </div>
+
+          <div class="price-calc-box">
+            <div class="calc-breakdown">
+              <div>Quantity: <span id="spQtyDisplay">1</span>x</div>
+              <div id="spAddonsText" style="font-size:12px; color:#777;">Includes selected style &amp; spices</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:16px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <button type="button" class="add-btn" style="padding:4px 14px; font-size:16px;" onclick="window.changeSpecialOrderQty(-1)">-</button>
+                <span id="spQtyVal" style="font-weight:800; font-size:18px;">1</span>
+                <button type="button" class="add-btn" style="padding:4px 14px; font-size:16px;" onclick="window.changeSpecialOrderQty(1)">+</button>
+              </div>
+              <div class="calc-total" id="spTotalVal">₹280</div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:12px; justify-content:flex-end;">
+            <button type="button" class="btn-secondary" onclick="window.closeSpecialOrderModal()">Cancel</button>
+            <button type="button" class="btn-primary" id="spSubmitBtn" onclick="window.submitSpecialOrder()">Place Special Order 🛒</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= VIEW DEAL DETAILS MODAL ================= -->
+  <div class="modal-overlay" id="dealDetailModal">
+    <div class="special-order-dialog" style="max-width:540px;">
+      <button class="modal-close-x" onclick="window.closeDealDetailModal()" title="Close">✕</button>
+      <div style="padding:24px;">
+        <img id="dealModalImg" src="assets/dishes/deal-biryani-combo.jpg" alt="Deal Item" style="width:100%; height:200px; object-fit:cover; border-radius:12px; margin-bottom:16px;" onerror="this.onerror=null; this.src='assets/dishes/bir-001.jpg'" />
+        <span class="deal-tag-badge" id="dealModalTag" style="position:static; display:inline-block; margin-bottom:8px;">🔥 VALUE COMBO</span>
+        <h2 id="dealModalTitle" style="font-family:'Fraunces',serif; font-size:22px; margin:4px 0 10px 0;">Combo Details</h2>
+        <p id="dealModalDesc" style="font-size:14px; color:#555; line-height:1.6; margin-bottom:16px;">Description here.</p>
+        <div style="background:#fff; padding:14px 18px; border-radius:10px; border:1px solid #eee; margin-bottom:18px;">
+          <h4 style="margin:0 0 6px 0; font-size:14px;">📦 What's Included:</h4>
+          <ul id="dealModalItemsList" style="margin:0; padding-left:20px; font-size:13px; color:#444; line-height:1.6;">
+            <li>1x Main Dish</li>
+            <li>1x Starter Item</li>
+            <li>1x Traditional Beverage</li>
+          </ul>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="font-size:12px; color:#888; text-decoration:line-through;" id="dealModalOrigPrice">₹420</div>
+            <div style="font-size:24px; font-weight:800; color:var(--clay); font-family:'Fraunces',serif;" id="dealModalOfferPrice">₹319</div>
+          </div>
+          <button type="button" class="btn-primary" id="dealModalAddBtn">+ Add Combo to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+
+</body>
+</html>
