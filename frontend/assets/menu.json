@@ -1,0 +1,524 @@
+[
+  {
+    "id": "meals-001",
+    "name_en": "Veg Meals (Full Thali)",
+    "name_ta": "வெஜ் மீல்ஸ்",
+    "category": "Meals",
+    "meal_type": [
+      "lunch"
+    ],
+    "price": 150,
+    "veg": true,
+    "spice_level": "mild",
+    "description_en": "Unlimited rice with sambar, rasam, poriyal, kootu, appalam and curd — the classic South Indian lunch thali.",
+    "description_ta": "சாம்பார், ரசம், பொரியல், கூட்டு, அப்பளம், தயிருடன் வரம்பற்ற சாதம்.",
+    "tags": [
+      "meals",
+      "thali",
+      "lunch",
+      "vegetarian",
+      "bestseller"
+    ],
+    "customizations": [
+      "Extra Rice",
+      "Extra Sambar",
+      "Extra Appalam"
+    ],
+    "image": "assets/dishes/meals-001.jpg",
+    "image_query": "South Indian vegetarian thali banana leaf meals",
+    "emoji": "🍛",
+    "rating": 4.5,
+    "rating_count": 512
+  },
+  {
+    "id": "meals-002",
+    "name_en": "Chicken Meals (Non-Veg Thali)",
+    "name_ta": "சிக்கன் மீல்ஸ்",
+    "category": "Meals",
+    "meal_type": [
+      "lunch"
+    ],
+    "price": 210,
+    "veg": false,
+    "spice_level": "medium",
+    "description_en": "Unlimited rice with chicken curry, sambar, rasam, poriyal and appalam.",
+    "description_ta": "சிக்கன் கறி, சாம்பார், ரசம், பொரியலுடன் வரம்பற்ற சாதம்.",
+    "tags": [
+      "meals",
+      "thali",
+      "lunch",
+      "non-veg",
+      "chicken"
+    ],
+    "customizations": [
+      "Extra Chicken Curry",
+      "Extra Rice"
+    ],
+    "image": "assets/dishes/meals-002.jpg",
+    "image_query": "South Indian non vegetarian chicken thali meals",
+    "emoji": "🍗",
+    "rating": 4.3,
+    "rating_count": 318
+  },
+  {
+    "id": "bir-001",
+    "name_en": "Chicken Biryani",
+    "name_ta": "சிக்கன் பிரியாணி",
+    "category": "Biryani",
+    "meal_type": [
+      "lunch",
+      "dinner"
+    ],
+    "price": 220,
+    "veg": false,
+    "spice_level": "medium",
+    "description_en": "Fragrant seeraga samba rice slow-cooked with tender chicken, whole spices and caramelised onions.",
+    "description_ta": "மணமிக்க சீரக சம்பா அரிசி, மென்மையான சிக்கன் மற்றும் வாசனை மசாலாக்களுடன் சமைக்கப்பட்டது.",
+    "tags": [
+      "biryani",
+      "chicken",
+      "rice",
+      "spicy",
+      "non-veg",
+      "bestseller"
+    ],
+    "customizations": [
+      "Extra Masala",
+      "Extra Raita",
+      "Boneless",
+      "Extra Spicy"
+    ],
+    "image": "assets/dishes/bir-001.jpg",
+    "image_query": "Chicken biryani Indian rice dish",
+    "emoji": "🍚",
+    "rating": 4.6,
+    "rating_count": 1204
+  },
+  {
+    "id": "bir-002",
+    "name_en": "Mutton Biryani",
+    "name_ta": "மட்டன் பிரியாணி",
+    "category": "Biryani",
+    "meal_type": [
+      "lunch",
+      "dinner"
+    ],
+    "price": 280,
+    "veg": false,
+    "spice_level": "medium",
+    "description_en": "Slow-cooked mutton on the bone with layered basmati rice and a rich masala gravy.",
+    "description_ta": "எலும்புடன் கூடிய மட்டன் மற்றும் பாஸ்மதி அரிசியுடன் அடுக்கப்பட்ட பிரியாணி.",
+    "tags": [
+      "biryani",
+      "mutton",
+      "rice",
+      "non-veg",
+      "premium"
+    ],
+    "customizations": [
+      "Extra Masala",
+      "Extra Raita",
+      "Extra Spicy"
+    ],
+    "image": "assets/dishes/bir-002.jpg",
+    "image_query": "Mutton biryani Indian rice dish",
+    "emoji": "🍖",
+    "rating": 4.5,
+    "rating_count": 642
+  },
+  {
+    "id": "bir-003",
+    "name_en": "Veg Biryani",
+    "name_ta": "வெஜ் பிரியாணி",
+    "category": "Biryani",
+    "meal_type": [
+      "lunch",
+      "dinner"
+    ],
+    "price": 160,
+    "veg": true,
+    "spice_level": "mild",
+    "description_en": "Mixed vegetables and paneer cooked with fragrant basmati rice and kaima masala.",
+    "description_ta": "கலவை காய்கறிகள் மற்றும் பன்னீருடன் கூடிய வாசனை பிரியாணி.",
+    "tags": [
+      "biryani",
+      "veg",
+      "rice",
+      "vegetarian"
+    ],
+    "customizations": [
+      "Extra Paneer",
+      "Extra Raita"
+    ],
+    "image": "assets/dishes/bir-003.jpg",
+    "image_query": "Vegetable biryani Indian rice dish",
+    "emoji": "🥘",
+    "rating": 4.2,
+    "rating_count": 287
+  },
+  {
+    "id": "dosa-001",
+    "name_en": "Ghee Roast Dosa",
+    "name_ta": "நெய் ரோஸ்ட் தோசை",
+    "category": "Tiffin",
+    "meal_type": [
+      "breakfast",
+      "dinner"
+    ],
+    "price": 90,
+    "veg": true,
+    "spice_level": "none",
+    "description_en": "Crisp fermented rice-lentil crepe roasted in pure ghee, served with sambar and chutneys.",
+    "description_ta": "தூய நெய்யில் வறுக்கப்பட்ட மொறுமொறு தோசை, சாம்பார் மற்றும் சட்னியுடன்.",
+    "tags": [
+      "dosa",
+      "tiffin",
+      "breakfast",
+      "vegetarian",
+      "bestseller"
+    ],
+    "customizations": [
+      "Extra Ghee",
+      "Onion",
+      "Masala Stuffing"
+    ],
+    "image": "assets/dishes/dosa-001.jpg",
+    "image_query": "Ghee roast dosa South Indian",
+    "emoji": "🥞",
+    "rating": 4.7,
+    "rating_count": 921
+  },
+  {
+    "id": "dosa-002",
+    "name_en": "Masala Dosa",
+    "name_ta": "மசாலா தோசை",
+    "category": "Tiffin",
+    "meal_type": [
+      "breakfast",
+      "dinner"
+    ],
+    "price": 80,
+    "veg": true,
+    "spice_level": "mild",
+    "description_en": "Classic dosa filled with spiced potato masala, served with sambar and coconut chutney.",
+    "description_ta": "உருளைக்கிழங்கு மசாலா நிரப்பப்பட்ட தோசை.",
+    "tags": [
+      "dosa",
+      "tiffin",
+      "breakfast",
+      "vegetarian"
+    ],
+    "customizations": [
+      "Extra Masala",
+      "Extra Chutney"
+    ],
+    "image": "assets/dishes/dosa-002.jpg",
+    "image_query": "Masala dosa with sambar and chutney",
+    "emoji": "🌯",
+    "rating": 4.4,
+    "rating_count": 754
+  },
+  {
+    "id": "dinner-001",
+    "name_en": "Parotta & Salna",
+    "name_ta": "பரோட்டா & சால்னா",
+    "category": "Dinner Special",
+    "meal_type": [
+      "dinner"
+    ],
+    "price": 100,
+    "veg": true,
+    "spice_level": "medium",
+    "description_en": "Flaky layered parotta served with a spiced mixed-vegetable salna gravy.",
+    "description_ta": "காரமான கலவை காய்கறி சால்னாவுடன் பரோட்டா.",
+    "tags": [
+      "parotta",
+      "dinner",
+      "vegetarian"
+    ],
+    "customizations": [
+      "2 pcs",
+      "4 pcs",
+      "Egg Salna"
+    ],
+    "image": "assets/dishes/dinner-001.jpg",
+    "image_query": "Parotta Indian layered flatbread with salna",
+    "emoji": "🫓",
+    "rating": 4.4,
+    "rating_count": 488
+  },
+  {
+    "id": "dinner-002",
+    "name_en": "Chapati Kurma",
+    "name_ta": "சப்பாத்தி குருமா",
+    "category": "Dinner Special",
+    "meal_type": [
+      "dinner"
+    ],
+    "price": 90,
+    "veg": true,
+    "spice_level": "mild",
+    "description_en": "Soft wheat chapatis served with a coconut-based mixed vegetable kurma.",
+    "description_ta": "தேங்காய் அடிப்படையிலான காய்கறி குருமாவுடன் சப்பாத்தி.",
+    "tags": [
+      "chapati",
+      "dinner",
+      "vegetarian"
+    ],
+    "customizations": [
+      "4 pcs",
+      "6 pcs"
+    ],
+    "image": "assets/dishes/dinner-002.jpg",
+    "image_query": "Chapati with vegetable kurma",
+    "emoji": "🥙",
+    "rating": 4.1,
+    "rating_count": 226
+  },
+  {
+    "id": "curry-001",
+    "name_en": "Chettinad Chicken Curry",
+    "name_ta": "செட்டிநாடு சிக்கன் கறி",
+    "category": "Curry",
+    "meal_type": [
+      "lunch",
+      "dinner"
+    ],
+    "price": 240,
+    "veg": false,
+    "spice_level": "hot",
+    "description_en": "Fiery Chettinad-style chicken curry roasted with black pepper, star anise and curry leaves.",
+    "description_ta": "மிளகு, அன்னாசிப்பூ மற்றும் கறிவேப்பிலையுடன் வறுத்த காரமான செட்டிநாடு கறி.",
+    "tags": [
+      "curry",
+      "chicken",
+      "spicy",
+      "non-veg"
+    ],
+    "customizations": [
+      "Extra Spicy",
+      "Boneless"
+    ],
+    "image": "assets/dishes/curry-001.jpg",
+    "image_query": "Chettinad chicken curry Tamil Nadu",
+    "emoji": "🍲",
+    "rating": 4.5,
+    "rating_count": 396
+  },
+  {
+    "id": "curry-002",
+    "name_en": "Paneer Butter Masala",
+    "name_ta": "பன்னீர் பட்டர் மசாலா",
+    "category": "Curry",
+    "meal_type": [
+      "lunch",
+      "dinner"
+    ],
+    "price": 190,
+    "veg": true,
+    "spice_level": "mild",
+    "description_en": "Soft paneer cubes simmered in a creamy tomato-cashew gravy.",
+    "description_ta": "கிரீமி தக்காளி-முந்திரி குழம்பில் மென்மையான பன்னீர்.",
+    "tags": [
+      "curry",
+      "paneer",
+      "vegetarian",
+      "mild"
+    ],
+    "customizations": [
+      "Extra Gravy",
+      "Less Spicy"
+    ],
+    "image": "assets/dishes/curry-002.jpg",
+    "image_query": "Paneer butter masala Indian curry",
+    "emoji": "🧀",
+    "rating": 4.3,
+    "rating_count": 571
+  },
+  {
+    "id": "starter-001",
+    "name_en": "Chilli Chicken",
+    "name_ta": "சில்லி சிக்கன்",
+    "category": "Starter",
+    "meal_type": [
+      "dinner"
+    ],
+    "price": 200,
+    "veg": false,
+    "spice_level": "hot",
+    "description_en": "Indo-Chinese style crispy chicken tossed in a spicy soy-chilli sauce with capsicum and onion.",
+    "description_ta": "காரமான சோயா-மிளகாய் சாஸில் வறுத்த மொறுமொறு சிக்கன்.",
+    "tags": [
+      "starter",
+      "chicken",
+      "spicy",
+      "non-veg",
+      "indo-chinese"
+    ],
+    "customizations": [
+      "Dry",
+      "Gravy",
+      "Extra Spicy"
+    ],
+    "image": "assets/dishes/starter-001.jpg",
+    "image_query": "Chilli chicken Indo Chinese dish",
+    "emoji": "🍢",
+    "rating": 4.2,
+    "rating_count": 412
+  },
+  {
+    "id": "dessert-001",
+    "name_en": "Gulab Jamun",
+    "name_ta": "குலாப் ஜாமூன்",
+    "category": "Dessert",
+    "meal_type": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "price": 60,
+    "veg": true,
+    "spice_level": "none",
+    "description_en": "Warm milk-solid dumplings soaked in rose-cardamom sugar syrup.",
+    "description_ta": "ரோஜா-ஏலக்காய் சர்க்கரை பாகில் ஊறவைத்த இனிப்பு.",
+    "tags": [
+      "dessert",
+      "sweet",
+      "vegetarian"
+    ],
+    "customizations": [
+      "2 pcs",
+      "4 pcs",
+      "With Ice Cream"
+    ],
+    "image": "assets/dishes/dessert-001.jpg",
+    "image_query": "Gulab jamun Indian sweet dessert",
+    "emoji": "🍮",
+    "rating": 4.6,
+    "rating_count": 689
+  },
+  {
+    "id": "bev-001",
+    "name_en": "Filter Coffee",
+    "name_ta": "பில்டர் காபி",
+    "category": "Beverage",
+    "meal_type": [
+      "breakfast",
+      "lunch",
+      "dinner"
+    ],
+    "price": 40,
+    "veg": true,
+    "spice_level": "none",
+    "description_en": "Strong South Indian decoction coffee frothed with hot milk, served in a tumbler-davarah.",
+    "description_ta": "பாரம்பரிய டம்ளர்-தவரா பில்டர் காபி.",
+    "tags": [
+      "beverage",
+      "coffee",
+      "vegetarian"
+    ],
+    "customizations": [
+      "Extra Strong",
+      "Less Sugar"
+    ],
+    "image": "assets/dishes/bev-001.jpg",
+    "image_query": "South Indian filter coffee tumbler davarah",
+    "emoji": "☕",
+    "rating": 4.8,
+    "rating_count": 1330
+  },
+  {
+    "id": "starter-002",
+    "name_en": "Chicken 65",
+    "name_ta": "சிக்கன் 65",
+    "category": "Starter",
+    "meal_type": [
+      "lunch",
+      "dinner"
+    ],
+    "price": 190,
+    "veg": false,
+    "spice_level": "hot",
+    "description_en": "Crisp spiced boneless chicken marinated in ginger-garlic, Kashmiri chilli and curry leaves.",
+    "description_ta": "இஞ்சி, பூண்டு, காஷ்மீரி மிளகாய் மற்றும் கறிவேப்பிலையில் ஊறவைத்து பொரித்த மொறுமொறு சிக்கன்.",
+    "tags": [
+      "starter",
+      "chicken 65",
+      "chicken",
+      "spicy",
+      "non-veg",
+      "bestseller"
+    ],
+    "customizations": [
+      "Extra Lemon",
+      "Extra Spicy"
+    ],
+    "image": "assets/dishes/starter-001.jpg",
+    "image_query": "Chicken 65 South Indian appetizer",
+    "emoji": "🍗",
+    "rating": 4.7,
+    "rating_count": 890
+  },
+  {
+    "id": "sp-kari-dosa",
+    "name_en": "Madurai Mutton Kari Dosa",
+    "name_ta": "மதுரை மட்டன் காரி தோசை",
+    "category": "Tiffin",
+    "meal_type": [
+      "dinner"
+    ],
+    "price": 280,
+    "veg": false,
+    "spice_level": "hot",
+    "description_en": "Crispy golden fermented dosa layered with spicy minced mutton keema, fried egg, and rich Chettinad spices.",
+    "description_ta": "மட்டன் கீமா, முட்டை மற்றும் காரசாரமான செட்டிநாடு மசாலா கலந்த பாரம்பரிய காரி தோசை.",
+    "tags": [
+      "dosa",
+      "mutton",
+      "kari dosa",
+      "spicy",
+      "non-veg",
+      "special"
+    ],
+    "customizations": [
+      "Extra Salna",
+      "Extra Keema"
+    ],
+    "image": "assets/dishes/special-kari-dosa.jpg",
+    "image_query": "Madurai Kari Dosa mutton keema",
+    "emoji": "🥞",
+    "rating": 4.9,
+    "rating_count": 1420
+  },
+  {
+    "id": "bev-002",
+    "name_en": "Madurai Jigarthanda",
+    "name_ta": "மதுரை ஜிகர்தண்டா",
+    "category": "Beverage",
+    "meal_type": [
+      "lunch",
+      "dinner"
+    ],
+    "price": 80,
+    "veg": true,
+    "spice_level": "none",
+    "description_en": "Famous royal drink prepared with badam pisin, nannari syrup, basundi milk and creamy ice cream.",
+    "description_ta": "பாதாம் பிசின், நன்னாரி சர்பத், பாசுந்தி பால் மற்றும் ஐஸ்கிரீம் கலந்த புகழ்பெற்ற மதுரை பானம்.",
+    "tags": [
+      "beverage",
+      "dessert",
+      "jigarthanda",
+      "sweet",
+      "vegetarian"
+    ],
+    "customizations": [
+      "Extra Ice Cream",
+      "Special Basundi"
+    ],
+    "image": "assets/dishes/bev-001.jpg",
+    "image_query": "Madurai Jigarthanda traditional dessert drink",
+    "emoji": "🍨",
+    "rating": 4.9,
+    "rating_count": 1650
+  }
+]

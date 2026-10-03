@@ -665,17 +665,41 @@ function renderDashboardTableStatus() {
 // 3. MENU FETCHING & RENDERING
 // ==========================================
 async function fetchMenu() {
+  let loaded = false;
   try {
-    const res = await fetch(`${API_BASE}/menu`);
-    const data = await res.json();
-    menuData = data.items || [];
-    renderHomeDishes();
-    renderFullMenu(menuData);
-    renderSpecials();
-    renderChatMealBrowser("breakfast");
+    const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+    const timeoutId = controller ? setTimeout(() => controller.abort(), 2500) : null;
+    const res = await fetch(`${API_BASE}/menu`, { signal: controller ? controller.signal : undefined });
+    if (timeoutId) clearTimeout(timeoutId);
+    if (res.ok) {
+      const data = await res.json();
+      menuData = data.items || [];
+      if (menuData.length > 0) loaded = true;
+    }
   } catch (e) {
-    console.error("Failed to load menu", e);
+    console.warn("Backend API /menu not accessible (offline or cloud CORS/mixed-content). Attempting local assets/menu.json fallback...", e);
   }
+
+  // Fallback to local static assets/menu.json (ideal for Vercel/Netlify frontend-only deployments)
+  if (!loaded || !menuData.length) {
+    try {
+      const fallbackRes = await fetch("assets/menu.json");
+      if (fallbackRes.ok) {
+        const fallbackData = await fallbackRes.json();
+        menuData = Array.isArray(fallbackData) ? fallbackData : (fallbackData.items || []);
+        loaded = true;
+        console.info("Loaded menu successfully from local assets/menu.json fallback (Total items:", menuData.length, ")");
+      }
+    } catch (err) {
+      console.warn("Local assets/menu.json fallback also failed:", err);
+    }
+  }
+
+  window.menuData = menuData;
+  renderHomeDishes();
+  renderFullMenu(menuData);
+  renderSpecials();
+  renderChatMealBrowser("breakfast");
 }
 
 function renderHomeDishes() {
@@ -1045,15 +1069,45 @@ window.submitCustomizedItem = async function() {
 // ==========================================
 // 6. REQUIREMENT 1: ADD BUTTON / CART ENGINE
 // ==========================================
+function recalculateLocalCart() {
+  if (!currentCart || !currentCart.items) {
+    currentCart = { items: [], subtotal: 0, tax: 0, delivery_fee: 30, total: 0 };
+  }
+  const subtotal = currentCart.items.reduce((sum, item) => sum + (item.line_total || (item.unit_price * item.quantity)), 0);
+  const tax = Math.round(subtotal * 0.05 * 100) / 100;
+  const delivery_fee = currentCart.items.length > 0 ? 30 : 0;
+  currentCart.subtotal = subtotal;
+  currentCart.tax = tax;
+  currentCart.delivery_fee = delivery_fee;
+  currentCart.total = subtotal + tax + delivery_fee;
+  try {
+    localStorage.setItem("kpr_offline_cart", JSON.stringify(currentCart));
+  } catch (e) {}
+}
+
 async function fetchCart() {
   try {
-    const res = await fetch(`${API_BASE}/cart/${sessionId}`);
-    const cart = await res.json();
-    currentCart = cart;
-    updateCartUI(cart);
+    const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+    const timeoutId = controller ? setTimeout(() => controller.abort(), 1500) : null;
+    const res = await fetch(`${API_BASE}/cart/${sessionId}`, { signal: controller ? controller.signal : undefined });
+    if (timeoutId) clearTimeout(timeoutId);
+    if (res.ok) {
+      const cart = await res.json();
+      currentCart = cart;
+      updateCartUI(cart);
+      return;
+    }
   } catch (e) {
-    console.error("Failed to fetch cart", e);
+    // Backend API unreachable — fall back to local cart
   }
+
+  const savedCart = localStorage.getItem("kpr_offline_cart");
+  if (savedCart) {
+    try {
+      currentCart = JSON.parse(savedCart);
+    } catch (e) {}
+  }
+  updateCartUI(currentCart);
 }
 
 window.addToCart = async function(dishId, qty = 1, btnElement = null, customizations = [], explicitUnitPrice = null) {
@@ -1067,10 +1121,14 @@ window.addToCart = async function(dishId, qty = 1, btnElement = null, customizat
   const nameEn = item ? item.name_en : (dishId.startsWith("deal") ? "Special Combo" : "Delicious Dish");
   const price = explicitUnitPrice !== null ? explicitUnitPrice : (item ? item.price : 150);
 
+  let apiSuccess = false;
   try {
+    const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+    const timeoutId = controller ? setTimeout(() => controller.abort(), 2000) : null;
     const res = await fetch(`${API_BASE}/cart/add`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      signal: controller ? controller.signal : undefined,
       body: JSON.stringify({
         session_id: sessionId,
         item_id: dishId,
@@ -1081,27 +1139,58 @@ window.addToCart = async function(dishId, qty = 1, btnElement = null, customizat
         customizations: customizations
       })
     });
-
-    const data = await res.json();
-    if (data.cart) {
-      currentCart = data.cart;
-      updateCartUI(data.cart);
+    if (timeoutId) clearTimeout(timeoutId);
+    if (res.ok) {
+      const data = await res.json();
+      if (data.cart) {
+        currentCart = data.cart;
+        updateCartUI(data.cart);
+        apiSuccess = true;
+      }
     }
-    showToast(`Item added successfully! (${qty}x ${nameEn})`);
   } catch (e) {
-    console.error("Add to cart error:", e);
-    showToast("Item added successfully!");
+    // Network / Mixed Content error on Vercel
   }
+
+  if (!apiSuccess) {
+    if (!currentCart) currentCart = { items: [], subtotal: 0, tax: 0, delivery_fee: 30, total: 0 };
+    if (!currentCart.items) currentCart.items = [];
+    const custKey = JSON.stringify(customizations || []);
+    let existingItem = currentCart.items.find(i => i.item_id === dishId && JSON.stringify(i.customizations || []) === custKey);
+    if (existingItem) {
+      existingItem.quantity += qty;
+      existingItem.line_total = existingItem.quantity * existingItem.unit_price;
+    } else {
+      currentCart.items.push({
+        item_id: dishId,
+        name_en: nameEn,
+        name_ta: item ? item.name_ta : nameEn,
+        unit_price: price,
+        quantity: qty,
+        line_total: price * qty,
+        customizations: customizations
+      });
+    }
+    recalculateLocalCart();
+    updateCartUI(currentCart);
+  }
+
+  showToast(`Item added successfully! (${qty}x ${nameEn})`);
 };
 
 window.changeItemQty = async function(itemId, newQty, customizations = []) {
+  if (newQty <= 0) {
+    return window.removeItemFromCart(itemId, customizations);
+  }
+
+  let apiSuccess = false;
   try {
-    if (newQty <= 0) {
-      return window.removeItemFromCart(itemId, customizations);
-    }
+    const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+    const timeoutId = controller ? setTimeout(() => controller.abort(), 2000) : null;
     const res = await fetch(`${API_BASE}/cart/update-qty`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      signal: controller ? controller.signal : undefined,
       body: JSON.stringify({
         session_id: sessionId,
         item_id: itemId,
@@ -1109,36 +1198,62 @@ window.changeItemQty = async function(itemId, newQty, customizations = []) {
         quantity: newQty
       })
     });
-    const data = await res.json();
-    if (data.cart) {
-      currentCart = data.cart;
-      updateCartUI(data.cart);
+    if (timeoutId) clearTimeout(timeoutId);
+    if (res.ok) {
+      const data = await res.json();
+      if (data.cart) {
+        currentCart = data.cart;
+        updateCartUI(data.cart);
+        apiSuccess = true;
+      }
     }
-  } catch (e) {
-    console.error("Change quantity error:", e);
+  } catch (e) {}
+
+  if (!apiSuccess) {
+    const custKey = JSON.stringify(customizations || []);
+    const item = (currentCart.items || []).find(i => i.item_id === itemId && JSON.stringify(i.customizations || []) === custKey);
+    if (item) {
+      item.quantity = newQty;
+      item.line_total = item.quantity * item.unit_price;
+      recalculateLocalCart();
+      updateCartUI(currentCart);
+    }
   }
 };
 
 window.removeItemFromCart = async function(itemId, customizations = []) {
+  let apiSuccess = false;
   try {
+    const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+    const timeoutId = controller ? setTimeout(() => controller.abort(), 2000) : null;
     const res = await fetch(`${API_BASE}/cart/remove`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      signal: controller ? controller.signal : undefined,
       body: JSON.stringify({
         session_id: sessionId,
         item_id: itemId,
         customizations: customizations
       })
     });
-    const data = await res.json();
-    if (data.cart) {
-      currentCart = data.cart;
-      updateCartUI(data.cart);
+    if (timeoutId) clearTimeout(timeoutId);
+    if (res.ok) {
+      const data = await res.json();
+      if (data.cart) {
+        currentCart = data.cart;
+        updateCartUI(data.cart);
+        apiSuccess = true;
+      }
     }
-    showToast("Item removed from cart");
-  } catch (e) {
-    console.error("Remove item error:", e);
+  } catch (e) {}
+
+  if (!apiSuccess) {
+    const custKey = JSON.stringify(customizations || []);
+    currentCart.items = (currentCart.items || []).filter(i => !(i.item_id === itemId && JSON.stringify(i.customizations || []) === custKey));
+    recalculateLocalCart();
+    updateCartUI(currentCart);
   }
+  showToast("Item removed from cart");
 };
 
 function updateCartBadge() {
