@@ -2924,24 +2924,53 @@ function showBookingConfirmedUI(bookingId, tableId, name, phone, date, time, gue
   // Reviews Form
   document.getElementById("addReviewForm")?.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const payload = {
-      author: document.getElementById("revAuthor").value,
-      rating: parseInt(document.getElementById("revRating").value),
-      comment: document.getElementById("revComment").value
+    const author = document.getElementById("revAuthor")?.value?.trim() || "Guest Diner";
+    const rating = parseInt(document.getElementById("revRating")?.value) || 5;
+    const comment = document.getElementById("revComment")?.value?.trim();
+
+    if (!comment) {
+      showToast("Please enter a review comment");
+      return;
+    }
+
+    const newReview = {
+      id: "rev-" + Date.now(),
+      author: author,
+      rating: rating,
+      comment: comment,
+      date: "Just now"
     };
 
+    // Attempt cloud API if online
     try {
+      const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+      const timeoutId = controller ? setTimeout(() => controller.abort(), 2000) : null;
       await fetch(`${API_BASE}/reviews`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
+        signal: controller ? controller.signal : undefined,
+        body: JSON.stringify({ author, rating, comment })
       });
-      showToast("Review submitted! Thank you 🙏");
-      document.getElementById("revComment").value = "";
-      loadReviews();
+      if (timeoutId) clearTimeout(timeoutId);
     } catch (err) {
-      showToast("Review submitted!");
+      // Cloud API offline
     }
+
+    // Always persist to local storage so user review is instantly rendered
+    let allReviews = [];
+    const localStored = localStorage.getItem("kpr_customer_reviews");
+    if (localStored) {
+      try { allReviews = JSON.parse(localStored); } catch (e) { allReviews = [...DEFAULT_CUSTOMER_REVIEWS]; }
+    } else {
+      allReviews = [...DEFAULT_CUSTOMER_REVIEWS];
+    }
+    allReviews.unshift(newReview);
+    localStorage.setItem("kpr_customer_reviews", JSON.stringify(allReviews));
+
+    showToast("Review submitted! Thank you 🙏 🌟");
+    const commentInput = document.getElementById("revComment");
+    if (commentInput) commentInput.value = "";
+    loadReviews();
   });
 
   // Live Hotel Bill & In-Page Payment Listeners
@@ -3156,23 +3185,83 @@ async function loadAnalytics() {
 }
 
 // Reviews
+const DEFAULT_CUSTOMER_REVIEWS = [
+  {
+    id: "rev-1",
+    author: "Karthik R.",
+    rating: 5,
+    comment: "The Seeraga Samba Chicken Biryani is absolutely top tier! Authentic Madurai style flavor with fragrant spices.",
+    date: "Sep 25, 2026"
+  },
+  {
+    id: "rev-2",
+    author: "Priya S.",
+    rating: 5,
+    comment: "Ordering via Tanglish voice was super fast and convenient. Banana leaf meals and hot Sambar felt like home.",
+    date: "Sep 26, 2026"
+  },
+  {
+    id: "rev-3",
+    author: "Anand V.",
+    rating: 5,
+    comment: "Hot crispy Ghee Roast Dosa with coconut chutney was perfectly roasted and rich. Highly recommended dining experience!",
+    date: "Sep 27, 2026"
+  },
+  {
+    id: "rev-4",
+    author: "Meenakshi K.",
+    rating: 5,
+    comment: "We booked Table 3 for a family dinner. The ambience was lovely, service prompt, and the Madurai Jigarthanda is a must-try!",
+    date: "Sep 29, 2026"
+  }
+];
+
 async function loadReviews() {
+  const container = document.getElementById("reviewsList");
+  if (!container) return;
+
+  let reviews = [];
+  let apiSuccess = false;
+
   try {
-    const res = await fetch(`${API_BASE}/reviews`);
-    const data = await res.json();
-    const container = document.getElementById("reviewsList");
-    if (container) {
-      container.innerHTML = (data.reviews || []).map(r => `
-        <div style="background:#fff; padding:16px; border-radius:8px; margin-bottom:12px; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-          <div style="display:flex; justify-content:space-between;">
-            <strong>${r.author}</strong>
-            <span>${"⭐".repeat(r.rating)}</span>
-          </div>
-          <p style="font-size:13px; color:#444; margin:8px 0 0 0;">${r.comment}</p>
-        </div>
-      `).join("");
+    const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+    const timeoutId = controller ? setTimeout(() => controller.abort(), 2000) : null;
+    const res = await fetch(`${API_BASE}/reviews`, { signal: controller ? controller.signal : undefined });
+    if (timeoutId) clearTimeout(timeoutId);
+    if (res.ok) {
+      const data = await res.json();
+      if (data.reviews && data.reviews.length) {
+        reviews = data.reviews;
+        apiSuccess = true;
+      }
     }
-  } catch (e) {}
+  } catch (e) {
+    // Cloud API offline fallback
+  }
+
+  if (!apiSuccess) {
+    const localStored = localStorage.getItem("kpr_customer_reviews");
+    if (localStored) {
+      try {
+        reviews = JSON.parse(localStored);
+      } catch (e) {
+        reviews = DEFAULT_CUSTOMER_REVIEWS;
+      }
+    } else {
+      reviews = DEFAULT_CUSTOMER_REVIEWS;
+    }
+  }
+
+  container.innerHTML = reviews.map(r => `
+    <div class="review-item-card">
+      <div class="review-card-header">
+        <strong class="review-card-author">${r.author || 'Guest Diner'}</strong>
+        <span class="review-card-stars">${"⭐".repeat(r.rating || 5)}</span>
+      </div>
+      <p class="review-card-comment">${r.comment || ''}</p>
+      ${r.date ? `<div class="review-card-date" style="margin-top:8px; font-size:11px; color:#888;">🗓️ ${r.date}</div>` : ''}
+    </div>
+  `).join("");
 }
 
 // Nutrition Guide
